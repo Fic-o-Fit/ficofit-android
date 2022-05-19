@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000"
+        motion:autoTransition="animateToEnd">
+       <KeyFrameSet>
+       </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start"></ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/illustration_on_boarding_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="160dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent" />
+        <Constraint
+            android:id="@+id/tv_on_boarding_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_one"
+            motion:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_one"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="-32dp" />
+        <Constraint
+            android:id="@+id/menu_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="@+id/menu1"
+            motion:layout_constraintStart_toStartOf="@+id/menu1" />
+    </ConstraintSet>
+    <ConstraintSet
+        android:id="@+id/menu_two"
+        motion:deriveConstraintsFrom="@+id/end" >
+        <Constraint
+            android:id="@+id/illustration_on_boarding_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp"
+            motion:layout_constraintEnd_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/menu_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="@+id/menu2"
+            motion:layout_constraintStart_toStartOf="@+id/menu2" />
+        <Constraint
+            android:id="@+id/illustration_on_boarding_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="160dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent" />
+        <Constraint
+            android:id="@+id/tv_on_boarding_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_two"
+            motion:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_two"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="-32dp" />
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetStart="@+id/end"
+        motion:constraintSetEnd="@+id/menu_two" >
+        <OnClick motion:targetId="@+id/fab_next" />
+        <OnSwipe motion:dragDirection="dragLeft" />
+    </Transition>
+    <ConstraintSet
+        android:id="@+id/menu_three"
+        motion:deriveConstraintsFrom="@+id/menu_two" >
+        <Constraint
+            android:id="@+id/illustration_on_boarding_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp"
+            motion:layout_constraintEnd_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/menu_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="@+id/menu3"
+            motion:layout_constraintStart_toStartOf="@+id/menu3" />
+        <Constraint
+            android:id="@+id/illustration_on_boarding_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="160dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent" />
+        <Constraint
+            android:id="@+id/tv_on_boarding_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_two"
+            motion:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_two"
+            android:layout_marginTop="32dp" />
+        <Constraint
+            android:id="@+id/tv_on_boarding_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_three"
+            motion:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_three"
+            android:layout_marginTop="32dp" />
+        <Constraint
+            android:id="@+id/fab_next"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="32dp"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/fab_intent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            motion:layout_constraintTop_toTopOf="@+id/fab_next"
+            motion:layout_constraintStart_toStartOf="@+id/fab_next" />
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetStart="@+id/menu_two"
+        motion:constraintSetEnd="@+id/menu_three" >
+        <OnClick motion:targetId="@+id/fab_next" />
+        <OnSwipe motion:dragDirection="dragLeft" />
+    </Transition>
+</MotionScene>
