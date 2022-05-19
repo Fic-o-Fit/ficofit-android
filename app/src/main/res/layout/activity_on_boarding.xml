@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/lorem"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_one"
         app:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_one" />
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/lorem"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_two"
         app:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_two" />
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/lorem"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_three"
         app:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_three" />
@@ -99,8 +99,8 @@
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/fab_next"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,9 +111,9 @@
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/menu1"
         app:layout_constraintStart_toEndOf="@+id/menu1"
         app:srcCompat="@drawable/ic_circle_24"
@@ -122,9 +122,9 @@
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/menu2"
         app:layout_constraintStart_toEndOf="@+id/menu2"
         app:srcCompat="@drawable/ic_circle_24"
@@ -133,8 +133,8 @@
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu_active"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         app:layout_constraintStart_toStartOf="@+id/menu1"
         app:layout_constraintTop_toTopOf="@+id/menu1"
         app:srcCompat="@drawable/ic_circle_24"
