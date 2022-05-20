@@ -1,4 +1,4 @@
-package com.c22ps072.ficofit.ui
+package com.c22ps072.ficofit.ui.onboarding
 
 import android.content.Intent
 import android.os.Build
