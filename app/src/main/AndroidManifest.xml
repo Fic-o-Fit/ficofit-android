@@ -10,8 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FicOFit">
         <activity
-            android:name=".ui.OnBoardingActivity"
-            android:exported="true" >
+            android:name=".ui.home.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.FicOFit.NoActionBar" />
+        <activity
+            android:name=".ui.authentication.AutneticationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.onboarding.OnBoardingActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,8 +28,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"

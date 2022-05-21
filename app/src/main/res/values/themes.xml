@@ -26,4 +26,53 @@
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/baseColor</item>
     </style>
+
+    <style name="TextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="TextStyle.AppName">
+        <item name="android:textSize">26sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="TextStyle.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="TextStyle.Title.Regular">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="TextStyle.SubTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="TextStyle.SubTitle.Regular">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="TextStyle.Content">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="TextStyle.Content.Regular">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="Theme.FicOFit.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FicOFit.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FicOFit.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
