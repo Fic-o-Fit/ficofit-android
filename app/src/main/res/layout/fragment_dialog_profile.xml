@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.authentication.dialog.DialogProfileFragment">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/baseColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/on_boarding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="@string/on_boarding"
+        android:textColor="@color/primaryColor"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_chat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:drawableTint="@color/primaryColor" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/text_input_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_greetings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/chat_box"
+                android:padding="15dp"
+                android:text="@string/greetings" />
+
+            <TextView
+                android:id="@+id/tv_get_to_know"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/chat_box"
+                android:padding="15dp"
+                android:text="@string/get_to_know" />
+
+            <TextView
+                android:id="@+id/tv_gender_q"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/chat_box"
+                android:padding="15dp"
+                android:text="@string/gender_q" />
+
+            <TextView
+                android:id="@+id/tv_heading_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/iam_a"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rg_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_male"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@android:color/transparent"
+                    android:drawableTop="@drawable/ic_male"
+                    android:paddingTop="24dp"
+                    android:text="@string/male"
+                    android:textAlignment="center"
+                    android:textColor="@color/checkbox_text_selector"
+                    app:drawableTint="@color/checkbox_text_selector" />
+
+                <RadioButton
+                    android:id="@+id/rb_female"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@android:color/transparent"
+                    android:drawableTop="@drawable/ic_female"
+                    android:paddingTop="24dp"
+                    android:text="@string/female"
+                    android:textAlignment="center"
+                    android:textColor="@color/checkbox_text_selector"
+                    app:drawableTint="@color/checkbox_text_selector" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/chat_box"
+                android:padding="15dp"
+                android:text="@string/height" />
+
+            <TextView
+                android:id="@+id/tv_height_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/chat_box_answer"
+                android:padding="15dp"
+                android:textColor="@android:color/white"
+                tools:ignore="TextContrastCheck"
+                tools:text="170 CM" />
+
+            <TextView
+                android:id="@+id/tv_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/chat_box"
+                android:padding="15dp"
+                android:text="@string/weight" />
+
+            <TextView
+                android:id="@+id/tv_weight_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/chat_box_answer"
+                android:padding="15dp"
+                android:textColor="@android:color/white"
+                tools:ignore="TextContrastCheck"
+                tools:text="10Kg" />
+
+            <TextView
+                android:id="@+id/tv_closing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/chat_box"
+                android:padding="15dp"
+                android:text="@string/close_statement" />
+
+            <Button
+                android:id="@+id/btn_continue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="40dp"
+                android:drawableEnd="@drawable/ic_next"
+                app:drawableTint="@color/baseColor"
+                android:textColor="@color/baseColor"
+                android:text="@string/str_continue"
+                android:layout_gravity="center"
+                android:layout_marginVertical="16dp"
+                android:background="@drawable/shape_edit_text"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/text_input_box"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="24dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/type_here"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:paddingHorizontal="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_input_box"
+        app:layout_constraintEnd_toStartOf="@+id/ic_send"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/ic_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_send"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

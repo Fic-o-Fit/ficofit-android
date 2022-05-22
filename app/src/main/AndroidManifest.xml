@@ -15,8 +15,9 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.FicOFit.NoActionBar" />
         <activity
-            android:name=".ui.authentication.AutneticationActivity"
-            android:exported="false" />
+            android:name=".ui.authentication.AuthenticationActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".ui.onboarding.OnBoardingActivity"
             android:exported="true">
