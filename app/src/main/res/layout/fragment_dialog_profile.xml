@@ -48,9 +48,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box"
                 android:padding="15dp"
-                android:text="@string/greetings" />
+                android:text="@string/greetings"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_get_to_know"
@@ -58,9 +60,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="10dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box"
                 android:padding="15dp"
-                android:text="@string/get_to_know" />
+                android:text="@string/get_to_know"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_gender_q"
@@ -68,9 +72,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="10dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box"
                 android:padding="15dp"
-                android:text="@string/gender_q" />
+                android:text="@string/gender_q"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_heading_gender"
@@ -78,9 +84,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
+                android:alpha="0"
                 android:text="@string/iam_a"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <RadioGroup
                 android:id="@+id/rg_gender"
@@ -88,7 +96,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:alpha="0"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RadioButton
                     android:id="@+id/rb_male"
@@ -125,9 +135,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="32dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box"
                 android:padding="15dp"
-                android:text="@string/height" />
+                android:text="@string/height"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_height_answer"
@@ -136,9 +148,11 @@
                 android:layout_gravity="end"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="10dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box_answer"
                 android:padding="15dp"
                 android:textColor="@android:color/white"
+                android:visibility="gone"
                 tools:ignore="TextContrastCheck"
                 tools:text="170 CM" />
 
@@ -148,9 +162,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="32dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box"
                 android:padding="15dp"
-                android:text="@string/weight" />
+                android:text="@string/weight"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_weight_answer"
@@ -159,9 +175,11 @@
                 android:layout_gravity="end"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="10dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box_answer"
                 android:padding="15dp"
                 android:textColor="@android:color/white"
+                android:visibility="gone"
                 tools:ignore="TextContrastCheck"
                 tools:text="10Kg" />
 
@@ -171,22 +189,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="32dp"
+                android:alpha="0"
                 android:background="@drawable/chat_box"
                 android:padding="15dp"
-                android:text="@string/close_statement" />
+                android:text="@string/close_statement"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_continue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="40dp"
-                android:drawableEnd="@drawable/ic_next"
-                app:drawableTint="@color/baseColor"
-                android:textColor="@color/baseColor"
-                android:text="@string/str_continue"
                 android:layout_gravity="center"
                 android:layout_marginVertical="16dp"
-                android:background="@drawable/shape_edit_text"/>
+                android:alpha="0"
+                android:background="@drawable/shape_edit_text"
+                android:drawableEnd="@drawable/ic_next"
+                android:paddingHorizontal="40dp"
+                android:text="@string/str_continue"
+                android:textColor="@color/baseColor"
+                android:visibility="gone"
+                app:drawableTint="@color/baseColor" />
 
         </LinearLayout>
 
@@ -224,5 +246,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/text_input_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="text_input_box,et_input,ic_send" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
