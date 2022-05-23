@@ -9,6 +9,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import com.c22ps072.ficofit.MainActivity
 import com.c22ps072.ficofit.databinding.ActivityOnBoardingBinding
+import com.c22ps072.ficofit.ui.authentication.AuthenticationActivity
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
@@ -23,7 +24,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
         binding.fabIntent.setOnClickListener {
             Log.e("OnBoarding", "FAB clicked")
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, AuthenticationActivity::class.java))
         }
     }
 
