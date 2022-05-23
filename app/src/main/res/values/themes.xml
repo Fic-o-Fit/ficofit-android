@@ -67,6 +67,12 @@
         <item name="fontFamily">@font/nunito</item>
     </style>
 
+    <style name="TextStyle.ToolbarTitlePrimary">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
     <style name="Theme.FicOFit.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -75,4 +81,14 @@
     <style name="Theme.FicOFit.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.FicOFit.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="Layout">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">18dp</item>
+        <item name="android:paddingEnd">18dp</item>
+    </style>
 </resources>
