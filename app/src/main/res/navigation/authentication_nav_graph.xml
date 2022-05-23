@@ -35,5 +35,13 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_signUpFragment_to_dialogProfileFragment"
+            app:destination="@id/dialogProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dialogProfileFragment"
+        android:name="com.c22ps072.ficofit.ui.authentication.dialog.DialogProfileFragment"
+        android:label="fragment_dialog_profile"
+        tools:layout="@layout/fragment_dialog_profile" />
 </navigation>
