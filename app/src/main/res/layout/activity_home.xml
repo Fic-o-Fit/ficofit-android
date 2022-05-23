@@ -7,7 +7,7 @@
     tools:context=".ui.home.HomeActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_stories"
+        android:id="@+id/btn_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -26,7 +26,7 @@
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
         app:fabCradleMargin="8dp"
-        android:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/secondaryColor"
         app:fabCradleRoundedCornerRadius="40dp"
         app:fabCradleVerticalOffset="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,4 +48,12 @@
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment_activity_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/home_nav_graph" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
