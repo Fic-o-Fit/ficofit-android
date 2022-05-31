@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/navigation_dashboard">
 
     <fragment
-        android:id="@+id/dashboardFragment"
+        android:id="@+id/navigation_dashboard"
         android:name="com.c22ps072.ficofit.ui.home.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.c22ps072.ficofit.ui.home.setting.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

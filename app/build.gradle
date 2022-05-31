@@ -54,8 +54,10 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     implementation 'io.github.shashank02051997:FancyToast:2.0.1'
-    //    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+
+    //CAMERA X
     implementation "androidx.camera:camera-camera2:1.2.0-alpha01"
     implementation "androidx.camera:camera-lifecycle:1.2.0-alpha01"
     implementation "androidx.camera:camera-view:1.2.0-alpha01"
@@ -97,4 +99,8 @@ dependencies {
 
     // Custom CalendarView
     implementation 'com.github.kizitonwose:CalendarView:1.0.4'
+
+    // Data Store
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences-core:1.0.0"
 }
