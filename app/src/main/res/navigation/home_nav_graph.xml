@@ -9,10 +9,23 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.c22ps072.ficofit.ui.home.dashboard.DashboardFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_leaderBoardFragment"
+            app:destination="@id/leaderBoardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_setting"
         android:name="com.c22ps072.ficofit.ui.home.setting.SettingsFragment"
         android:label="@string/str_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/leaderBoardFragment"
+        android:name="com.c22ps072.ficofit.ui.home.leaderboard.LeaderBoardFragment"
+        android:label="fragment_leader_board"
+        tools:layout="@layout/fragment_leader_board" >
+        <action
+            android:id="@+id/action_leaderBoardFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 </navigation>
