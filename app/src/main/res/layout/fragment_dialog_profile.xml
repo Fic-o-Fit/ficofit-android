@@ -28,8 +28,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:drawableTint="@color/primaryColor" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -212,7 +212,7 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
     <View
         android:id="@+id/text_input_box"
@@ -245,7 +245,7 @@
         android:src="@drawable/ic_send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/text_input_group"

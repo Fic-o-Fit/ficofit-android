@@ -2,7 +2,7 @@ package com.c22ps072.ficofit.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.ActivityHomeBinding
@@ -18,13 +18,10 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView =binding.bottomNavigationView
+        val navView: BottomNavigationView = binding.bottomNavigationView
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController =navHostFragment.navController
+        val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
-
         navView.menu.getItem(1).isEnabled = false
     }
 }
