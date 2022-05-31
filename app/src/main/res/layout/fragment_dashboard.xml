@@ -76,7 +76,7 @@
             android:layout_marginHorizontal="18dp"
             android:layout_marginTop="16dp"
             android:elevation="0dp"
-            android:visibility=""
+            
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +144,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_he 65 6  6564`iCT65TTTTTTT90 ght="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_calendar_month"
                     app:tint="#4A00E0" />
 
@@ -207,7 +207,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingVertical="24dp"
-            android:visibility=""
+            
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -229,15 +229,15 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp" />
 
-<!--            <com.kizitonwose.calendarview.CalendarView-->
-<!--                android:id="@+id/calendar_view"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:cv_dayViewResource="@layout/calendar_day_layout"-->
-<!--                app:cv_inDateStyle="allMonths"-->
-<!--                app:cv_orientation="horizontal"-->
-<!--                app:cv_outDateStyle="endOfRow"-->
-<!--                app:cv_scrollMode="paged" />-->
+            <com.kizitonwose.calendarview.CalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cv_dayViewResource="@layout/calendar_day_layout"
+                app:cv_inDateStyle="allMonths"
+                app:cv_orientation="horizontal"
+                app:cv_outDateStyle="endOfRow"
+                app:cv_scrollMode="paged" />
 
 <!--            <LinearLayout-->
 <!--                android:layout_width="match_parent"-->

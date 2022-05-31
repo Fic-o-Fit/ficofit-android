@@ -11,6 +11,8 @@
     <color name="midGrey">#D0D2DA</color>
     <color name="lightGrey">#F5F5F7</color>
 
+    <color name="transparant">#6691C1F4</color>
+
     <!-- Base application theme. -->
     <style name="Theme.FicOFit" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -82,6 +84,53 @@
 
     <style name="Theme.FicOFit.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+
+    <style name="Text">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text.ToolbarTitlePrimary">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Text.Streak">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Streak.Counter">
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Text.Streak.Counter.Number">
+        <item name="android:textSize">58sp</item>
+    </style>
+
+    <style name="Text.Streak.Counter.Suffix">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="Text.Card">
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Text.Card.Number">
+        <item name="android:textSize">32sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="Text.Card.Suffix">
+        <item name="android:textSize">28sp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="Text.Card.Description">
+        <item name="fontFamily">?attr/fontFamily</item>
+    </style>
 
     <style name="Layout">
         <item name="android:clickable">true</item>
