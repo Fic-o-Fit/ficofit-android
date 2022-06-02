@@ -32,4 +32,8 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+
+    companion object {
+        const val EXTRA_TOKEN = "extra_token"
+    }
 }

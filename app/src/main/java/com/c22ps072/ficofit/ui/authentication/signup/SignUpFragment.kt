@@ -18,7 +18,6 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,8 +26,12 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSignUp.setOnClickListener {
+            val name = binding.etFullName.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+            val action = SignUpFragmentDirections.actionSignUpFragmentToDialogProfileFragment(name, email, password)
             // for the next, store name email etc to bundle and send to dialog/on boarding profile page
-            findNavController().navigate(R.id.action_signUpFragment_to_dialogProfileFragment)
+            findNavController().navigate(action)
         }
 
         binding.tvSignIn.setOnClickListener {

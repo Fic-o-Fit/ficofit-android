@@ -7,14 +7,34 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.ScrollView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.c22ps072.ficofit.databinding.FragmentDialogProfileBinding
+import com.c22ps072.ficofit.ui.authentication.signup.SignUpViewModel
 import com.c22ps072.ficofit.ui.home.HomeActivity
+import com.c22ps072.ficofit.utils.Helpers.isVisible
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class DialogProfileFragment : Fragment() {
     private var _binding: FragmentDialogProfileBinding? = null
 
     private val binding get() = _binding!!
+    private val args: DialogProfileFragmentArgs by navArgs()
+    private lateinit var name: String
+    private lateinit var email: String
+    private lateinit var password: String
+    private var gender: String ? = null
+    private lateinit var weight: String
+    private lateinit var height: String
+
+
+    private var dialogJob: Job = Job()
+    private val viewModel: SignUpViewModel by viewModels()
 
     private var initStartDelay: Long = 0
 
@@ -53,10 +73,10 @@ class DialogProfileFragment : Fragment() {
         setObjectAnimator(binding.rgGender, 0)
 
         binding.rgGender.setOnCheckedChangeListener { _, checkedId ->
-            var gender: String? = null
+//            var gender: String? = null
             when (checkedId) {
-                binding.rbMale.id -> gender = "MALE"
-                binding.rbFemale.id -> gender = "FEMALE"
+                binding.rbMale.id -> gender = "L"
+                binding.rbFemale.id -> gender = "F"
             }
 
             if (gender != null) {
@@ -65,17 +85,17 @@ class DialogProfileFragment : Fragment() {
                 binding.textInputGroup.visibility = View.VISIBLE
 
                 binding.icSend.setOnClickListener {
-                    val inputHeight = binding.etInput.text
-                    if (inputHeight.isNotEmpty()) {
-                        binding.tvHeightAnswer.text = "$inputHeight CM"
+                    height = binding.etInput.text.toString().trim()
+                    if (height.isNotEmpty()) {
+                        binding.tvHeightAnswer.text = "$height CM"
                         setObjectAnimator(binding.tvHeightAnswer, 0)
                         binding.etInput.text = null
 
                         setObjectAnimator(binding.tvWeight, 0)
                         binding.icSend.setOnClickListener {
-                            val inputWeight = binding.etInput.text
-                            if (inputWeight.isNotEmpty()) {
-                                binding.tvWeightAnswer.text = "$inputWeight Kg"
+                             weight = binding.etInput.text
+                            if (weight.isNotEmpty()) {
+                                binding.tvWeightAnswer.text = "$weight Kg"
                                 setObjectAnimator(binding.tvWeightAnswer, 0)
                                 binding.etInput.text = null
 
@@ -83,13 +103,44 @@ class DialogProfileFragment : Fragment() {
                                 setObjectAnimator(binding.btnContinue, 1000)
 
                                 binding.btnContinue.setOnClickListener {
-                                    startActivity(Intent(requireActivity(), HomeActivity::class.java))
-                                    activity?.finish()
+                                    signUpAction()
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun signUpAction(){
+        setLoading(true)
+        lifecycleScope.launchWhenResumed {
+            if (dialogJob.isActive) dialogJob.cancel()
+
+            dialogJob = launch {
+                viewModel.postUserRegister(args.name, args.email, args.password).collect{ result ->
+                    result.onSuccess { success ->
+                        Intent(requireContext(), HomeActivity::class.java).also {
+
+                        }
+                    }
+                    result.onFailure {
+                        Toast.makeText(requireContext(), "Sign Up Failed", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun setLoading(state: Boolean){
+        binding.apply {
+            scrollView.isEnabled = !state
+            if (state) {
+                viewLoading.isVisible(true)
+            }else {
+                viewLoading.isVisible(false)
             }
         }
     }

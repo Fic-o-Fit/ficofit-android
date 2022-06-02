@@ -37,11 +37,21 @@
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_signUpFragment_to_dialogProfileFragment"
-            app:destination="@id/dialogProfileFragment" />
+            app:destination="@id/dialogProfileFragment"/>
     </fragment>
     <fragment
         android:id="@+id/dialogProfileFragment"
         android:name="com.c22ps072.ficofit.ui.authentication.dialog.DialogProfileFragment"
         android:label="fragment_dialog_profile"
-        tools:layout="@layout/fragment_dialog_profile" />
+        tools:layout="@layout/fragment_dialog_profile" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+    </fragment>
 </navigation>
