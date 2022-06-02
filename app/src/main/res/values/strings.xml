@@ -28,4 +28,6 @@
     <string name="home">Home</string>
     <string name="str_settings">Settings</string>
     <string name="leader_board">Leader Board</string>
+    <string name="fun_games">Fun Games</string>
+    <string name="calisthenic">Calisthenic</string>
 </resources>

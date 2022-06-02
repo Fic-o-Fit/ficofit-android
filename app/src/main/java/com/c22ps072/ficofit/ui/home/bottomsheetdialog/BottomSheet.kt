@@ -26,10 +26,20 @@ class BottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.icSitUp.setOnClickListener {
-            val intent = Intent(activity, CameraActivity::class.java)
-            startActivity(intent)
-            dismiss()
+            launchCamera()
         }
+        binding.icPushUp.setOnClickListener {
+            launchCamera()
+        }
+        binding.icTempleRun.setOnClickListener {
+            launchCamera()
+        }
+    }
+
+    private fun launchCamera() {
+        val intent = Intent(activity, CameraActivity::class.java)
+        startActivity(intent)
+        dismiss()
     }
 
     override fun onDestroyView() {
