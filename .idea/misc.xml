@@ -42,6 +42,8 @@
         <entry key="..\:/Users/HP/Capstone/ficofit-android/app/src/main/res/menu/home_menu.xml" value="0.2" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable-v24/bg_checkbox_answer.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/alignment_selector.xml" value="0.129" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_bottom_sheet_dialog.xml" value="0.13" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_capsul.xml" value="0.13" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_checkbox.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_checkbox_checked.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/chat_box.xml" value="0.16" />
@@ -62,6 +64,7 @@
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_home.xml" value="0.13854166666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_on_boarding.xml" value="0.2" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_dialog_profile.xml" value="0.22" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_leader_board.xml" value="0.22447916666666667" />
