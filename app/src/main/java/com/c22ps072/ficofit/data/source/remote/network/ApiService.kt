@@ -1,5 +1,6 @@
 package com.c22ps072.ficofit.data.source.remote.network
 
+import com.c22ps072.ficofit.data.source.remote.response.ScoreResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignInResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignUpResponse
 import retrofit2.http.Field
@@ -23,4 +24,14 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): SignUpResponse
+
+    @FormUrlEncoded
+    @POST("/submit-score")
+    suspend fun postSubmitScore(
+        @Field("Content-Type") contentType: String = "application/json",
+        @Field("name") name: String,
+        @Field("score") score: Int,
+    ) : ScoreResponse
+
+
 }
