@@ -1,4 +1,4 @@
 package com.c22ps072.ficofit.data
 
-class AuthRepository {
+class AuthRepository   {
 }
