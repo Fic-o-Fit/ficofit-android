@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import com.c22ps072.ficofit.databinding.FragmentDialogProfileBinding
 import com.c22ps072.ficofit.ui.home.HomeActivity
@@ -40,15 +41,15 @@ class DialogProfileFragment : Fragment() {
             play(objectAnimator)
             startDelay = initStartDelay
         }.start()
-        binding.nestedScrollView.scrollTo(0, binding.nestedScrollView.bottom)
+        binding.scrollView.fullScroll(ScrollView.FOCUS_DOWN)
     }
 
     @SuppressLint("SetTextI18n")
     private fun setupAnimation() {
         setObjectAnimator(binding.tvGreetings, 0)
-        setObjectAnimator(binding.tvGetToKnow, 2000)
-        setObjectAnimator(binding.tvGenderQ, 3000)
-        setObjectAnimator(binding.tvHeadingGender, 2000)
+        setObjectAnimator(binding.tvGetToKnow, 1500)
+        setObjectAnimator(binding.tvGenderQ, 2000)
+        setObjectAnimator(binding.tvHeadingGender, 1500)
         setObjectAnimator(binding.rgGender, 0)
 
         binding.rgGender.setOnCheckedChangeListener { _, checkedId ->

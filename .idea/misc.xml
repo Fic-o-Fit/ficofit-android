@@ -42,6 +42,8 @@
         <entry key="..\:/Users/HP/Capstone/ficofit-android/app/src/main/res/menu/home_menu.xml" value="0.2" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable-v24/bg_checkbox_answer.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/alignment_selector.xml" value="0.129" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_bottom_sheet_dialog.xml" value="0.13" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_capsul.xml" value="0.13" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_checkbox.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/bg_checkbox_checked.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/chat_box.xml" value="0.16" />
@@ -52,18 +54,27 @@
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/ic_ilustration_onboarding_1.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/ic_ilustration_onboarding_2.xml" value="0.129" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/ic_male.xml" value="0.179" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/ic_trophy.xml" value="0.13" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/ic_trophy_bronze.xml" value="0.13" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/ic_trophy_silver.xml" value="0.13" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/illustration_hello.xml" value="0.1035" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/drawable/illustration_no_data.xml" value="0.1035" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/font/nunito.xml" value="0.23076923076923078" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_authentication.xml" value="0.1" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_camera.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_home.xml" value="0.13854166666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/activity_on_boarding.xml" value="0.2" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_dialog_profile.xml" value="0.18" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_dialog_profile.xml" value="0.22" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_leader_board.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_settings.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_sign_in.xml" value="0.12" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/fragment_sign_up.xml" value="0.13854166666666667" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/item_leader_board.xml" value="0.2" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/layout/item_users_point.xml" value="0.10260416666666666" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/Capstone-Bangkit/FicOFit/app/src/main/res/menu/home_menu.xml" value="0.19814814814814816" />
       </map>
     </option>
   </component>
