@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
-import com.c22ps072.ficofit.MainActivity
 import com.c22ps072.ficofit.databinding.ActivityOnBoardingBinding
 import com.c22ps072.ficofit.ui.authentication.AuthenticationActivity
 
