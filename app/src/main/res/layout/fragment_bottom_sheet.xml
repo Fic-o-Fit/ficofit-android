@@ -17,9 +17,12 @@
         app:layout_constraintTop_toTopOf="parent"
         android:backgroundTint="@color/darkGrey"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+    <ImageView
+        android:id="@+id/ic_sit_up"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_ilustration_onboarding_2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_top" />
 

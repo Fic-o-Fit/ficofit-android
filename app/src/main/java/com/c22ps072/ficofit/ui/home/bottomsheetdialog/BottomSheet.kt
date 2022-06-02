@@ -1,10 +1,12 @@
 package com.c22ps072.ficofit.ui.home.bottomsheetdialog
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.c22ps072.ficofit.databinding.FragmentBottomSheetBinding
+import com.c22ps072.ficofit.ui.gamelauncher.CameraActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheet : BottomSheetDialogFragment() {
@@ -18,6 +20,16 @@ class BottomSheet : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.icSitUp.setOnClickListener {
+            val intent = Intent(activity, CameraActivity::class.java)
+            startActivity(intent)
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {
