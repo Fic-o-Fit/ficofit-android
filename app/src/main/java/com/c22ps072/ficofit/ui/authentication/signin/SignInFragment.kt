@@ -2,6 +2,7 @@ package com.c22ps072.ficofit.ui.authentication.signin
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -64,15 +65,14 @@ class SignInFragment : Fragment() {
             signInJob  = launch {
                 viewModel.postUserSignIn(email, password).collect { result ->
                     result.onSuccess { credentials ->
-                        credentials.signIn.apply {
+                        credentials.apply {
+                            Log.d("SIGN IN", "token : $token")
+                            Log.d("SIGN IN", "refreshToken : $refreshToken")
                             token.let { token->
                                 viewModel.saveUserToken(token)
                             }
                             refreshToken.let { refreshToken ->
                                 viewModel.saveUserRefreshToken(refreshToken)
-                            }
-                            name.let { name ->
-                                viewModel.saveNameUser(name)
                             }.also {
                                 Intent(requireContext(), HomeActivity::class.java).also { intent ->
                                     intent.putExtra(EXTRA_TOKEN,token)

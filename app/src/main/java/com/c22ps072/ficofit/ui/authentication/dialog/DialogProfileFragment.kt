@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ScrollView
 import android.widget.Toast
@@ -158,17 +159,15 @@ class DialogProfileFragment : Fragment() {
 
             dialogJob = launch {
                 viewModel.postUserSignIn(args.email, args.password).collect{ result ->
-                    setLoading(false)
                     result.onSuccess { credentials ->
-                        credentials.signIn.apply {
+                        credentials.apply {
+                            Log.d("SIGN UP", "token : $token")
+                            Log.d("SIGN UP", "refreshToken : $refreshToken")
                             token.let { token->
                                 viewModel.saveUserToken(token)
                             }
                             refreshToken.let { refreshToken ->
                                 viewModel.saveUserRefreshToken(refreshToken)
-                            }
-                            name.let { name ->
-                                viewModel.saveNameUser(name)
                             }.also {
                                 Intent(requireContext(), HomeActivity::class.java).also { intent ->
                                     intent.putExtra(HomeActivity.EXTRA_TOKEN,token)
@@ -179,6 +178,7 @@ class DialogProfileFragment : Fragment() {
                         }
                     }
                     result.onFailure {
+                        setLoading(false)
                         Toast.makeText(requireContext(), "Sign In Failed", Toast.LENGTH_LONG).show()
                     }
                 }
