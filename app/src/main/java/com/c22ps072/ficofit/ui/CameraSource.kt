@@ -20,7 +20,7 @@ import com.c22ps072.ficofit.data.classifier.CalisthenicsClassifier
 import com.c22ps072.ficofit.data.classifier.PoseEstimator
 import com.c22ps072.ficofit.data.source.model.Pose
 import com.c22ps072.ficofit.utils.VisualizationUtils
-import com.c22ps072.ficofit.utils.YuvToRgbConverter
+import com.example.android.camera.utils.YuvToRgbConverter
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import kotlin.coroutines.resume

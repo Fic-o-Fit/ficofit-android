@@ -9,8 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class AuthRepository(
+class AuthRepository @Inject constructor (
     private val dataStore: PreferenceDataStore,
     private val apiService: ApiService
 ): AuthDataSource {
@@ -26,7 +27,7 @@ class AuthRepository(
 
     override suspend fun saveUserName(name: String) = dataStore.saveUserName(name)
 
-    override fun postUserLogin(email: String, password: String): Flow<Result<SignInResponse>> = flow {
+    override suspend fun postUserLogin(email: String, password: String): Flow<Result<SignInResponse>> = flow {
         try {
             val response = apiService.postUserLogin(email=email, password=password)
             emit(Result.success(response))
@@ -35,7 +36,7 @@ class AuthRepository(
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun postUserSignUp(
+    override suspend fun postUserSignUp(
         name: String,
         email: String,
         password: String

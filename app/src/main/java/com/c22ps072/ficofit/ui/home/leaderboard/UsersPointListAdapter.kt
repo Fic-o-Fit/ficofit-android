@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.c22ps072.ficofit.R
@@ -41,15 +42,13 @@ class UsersPointListAdapter: RecyclerView.Adapter<UsersPointListAdapter.ViewHold
             2 -> {
                 holder.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
             }
-            else -> {
-                holder.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
-            }
+            else -> holder.ivTrophy.setPadding(10)
         }
         
         holder.apply { 
             tvPosition.text = (position + 1).toString()
-            tvUsername.text = item.username
-            tvPoints.text = item.point.toString()
+            tvUsername.text = item.name
+            tvPoints.text = item.highScore.toString()
         }
     }
 

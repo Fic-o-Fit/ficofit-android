@@ -17,12 +17,12 @@ interface AuthDataSource {
 
     suspend fun saveUserName(name: String)
 
-    fun postUserLogin(
+    suspend fun postUserLogin(
         email: String,
         password: String
     ): Flow<Result<SignInResponse>>
 
-    fun postUserSignUp(
+    suspend fun postUserSignUp(
         name: String,
         email: String,
         password: String
