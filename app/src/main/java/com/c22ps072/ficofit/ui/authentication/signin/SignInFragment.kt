@@ -12,20 +12,22 @@ import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentSignInBinding
 import com.c22ps072.ficofit.ui.home.HomeActivity
 import kotlinx.coroutines.Job
-
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.c22ps072.ficofit.ui.authentication.AuthenticationViewModel
 import com.c22ps072.ficofit.ui.home.HomeActivity.Companion.EXTRA_TOKEN
 import com.c22ps072.ficofit.utils.Helpers.isVisible
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
 
 
     private var signInJob: Job = Job()
-    private val viewModel: SignViewModel by viewModels()
+    private val viewModel: AuthenticationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +67,9 @@ class SignInFragment : Fragment() {
                         credentials.signIn.apply {
                             token.let { token->
                                 viewModel.saveUserToken(token)
+                            }
+                            refreshToken.let { refreshToken ->
+                                viewModel.saveUserRefreshToken(refreshToken)
                             }
                             name.let { name ->
                                 viewModel.saveNameUser(name)

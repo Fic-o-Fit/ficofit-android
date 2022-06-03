@@ -1,4 +1,4 @@
-package com.c22ps072.ficofit.ui.authentication.signin
+package com.c22ps072.ficofit.ui.authentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,14 +8,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+class AuthenticationViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+    /**
+     * Interact with network / API
+     */
+
+    suspend fun postUserRegister(email: String, password: String, name: String) =
+        authRepository.postUserSignUp(name, email, password)
 
     suspend fun postUserSignIn(email: String, password: String) =
         authRepository.postUserLogin(email, password)
 
+    /**
+     * Interact with data store
+     */
+
     suspend fun saveUserToken(token: String) {
         viewModelScope.launch {
             authRepository.saveUserToken(token)
+        }
+    }
+
+    suspend fun saveUserRefreshToken(refreshToken: String) {
+        viewModelScope.launch {
+            authRepository.saveUserRefreshToken(refreshToken)
         }
     }
 

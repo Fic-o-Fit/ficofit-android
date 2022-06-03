@@ -8,33 +8,36 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentDialogProfileBinding
-import com.c22ps072.ficofit.ui.authentication.signup.SignUpViewModel
+import com.c22ps072.ficofit.ui.authentication.AuthenticationViewModel
 import com.c22ps072.ficofit.ui.home.HomeActivity
 import com.c22ps072.ficofit.utils.Helpers.isVisible
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import www.sanju.motiontoast.MotionToast
+import www.sanju.motiontoast.MotionToastStyle
 
+@AndroidEntryPoint
 class DialogProfileFragment : Fragment() {
     private var _binding: FragmentDialogProfileBinding? = null
 
     private val binding get() = _binding!!
     private val args: DialogProfileFragmentArgs by navArgs()
-    private lateinit var name: String
-    private lateinit var email: String
-    private lateinit var password: String
     private var gender: String ? = null
     private lateinit var weight: String
     private lateinit var height: String
 
+    private lateinit var simpleName: String
 
     private var dialogJob: Job = Job()
-    private val viewModel: SignUpViewModel by viewModels()
+    private val viewModel: AuthenticationViewModel by viewModels()
 
     private var initStartDelay: Long = 0
 
@@ -49,7 +52,7 @@ class DialogProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        simpleName = args.name.split(' ')[0]
         setupAnimation()
     }
 
@@ -66,21 +69,26 @@ class DialogProfileFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun setupAnimation() {
+        binding.tvGreetings.text = getString(R.string.greetings, simpleName)
         setObjectAnimator(binding.tvGreetings, 0)
+
         setObjectAnimator(binding.tvGetToKnow, 1500)
+
+        binding.tvGenderQ.text = getString(R.string.gender_q, simpleName)
         setObjectAnimator(binding.tvGenderQ, 2000)
+
         setObjectAnimator(binding.tvHeadingGender, 1500)
         setObjectAnimator(binding.rgGender, 0)
 
         binding.rgGender.setOnCheckedChangeListener { _, checkedId ->
-//            var gender: String? = null
             when (checkedId) {
                 binding.rbMale.id -> gender = "L"
-                binding.rbFemale.id -> gender = "F"
+                binding.rbFemale.id -> gender = "P"
             }
 
             if (gender != null) {
                 initStartDelay = 0
+                binding.tvHeight.text = getString(R.string.height, simpleName)
                 setObjectAnimator(binding.tvHeight, 0)
                 binding.textInputGroup.visibility = View.VISIBLE
 
@@ -91,9 +99,10 @@ class DialogProfileFragment : Fragment() {
                         setObjectAnimator(binding.tvHeightAnswer, 0)
                         binding.etInput.text = null
 
+                        binding.tvWeight.text = getString(R.string.weight, simpleName)
                         setObjectAnimator(binding.tvWeight, 0)
                         binding.icSend.setOnClickListener {
-                             weight = binding.etInput.text
+                             weight = binding.etInput.text.toString().trim()
                             if (weight.isNotEmpty()) {
                                 binding.tvWeightAnswer.text = "$weight Kg"
                                 setObjectAnimator(binding.tvWeightAnswer, 0)
@@ -120,13 +129,57 @@ class DialogProfileFragment : Fragment() {
 
             dialogJob = launch {
                 viewModel.postUserRegister(args.name, args.email, args.password).collect{ result ->
-                    result.onSuccess { success ->
-                        Intent(requireContext(), HomeActivity::class.java).also {
+                    setLoading(false)
+                    result.onSuccess {
+                        MotionToast.createToast(requireActivity(),
+                            "SignUp Successful",
+                            "You'll be redirected to Home Page",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.SHORT_DURATION,
+                            ResourcesCompat.getFont(requireActivity(), R.font.nunito)
+                        )
 
-                        }
+                        signInAction()
                     }
                     result.onFailure {
                         Toast.makeText(requireContext(), "Sign Up Failed", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun signInAction() {
+        setLoading(true)
+
+        lifecycleScope.launchWhenResumed {
+            if (dialogJob.isActive) dialogJob.cancel()
+
+            dialogJob = launch {
+                viewModel.postUserSignIn(args.email, args.password).collect{ result ->
+                    setLoading(false)
+                    result.onSuccess { credentials ->
+                        credentials.signIn.apply {
+                            token.let { token->
+                                viewModel.saveUserToken(token)
+                            }
+                            refreshToken.let { refreshToken ->
+                                viewModel.saveUserRefreshToken(refreshToken)
+                            }
+                            name.let { name ->
+                                viewModel.saveNameUser(name)
+                            }.also {
+                                Intent(requireContext(), HomeActivity::class.java).also { intent ->
+                                    intent.putExtra(HomeActivity.EXTRA_TOKEN,token)
+                                    startActivity(intent)
+                                    requireActivity().finish()
+                                }
+                            }
+                        }
+                    }
+                    result.onFailure {
+                        Toast.makeText(requireContext(), "Sign In Failed", Toast.LENGTH_LONG).show()
                     }
                 }
             }
