@@ -32,6 +32,11 @@
         <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
     </style>
 
+    <!-- Splash Screen -->
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic_medal</item>
+    </style>
+
     <!-- Bottom Sheet Dialog Theme -->
     <style name="BottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">
