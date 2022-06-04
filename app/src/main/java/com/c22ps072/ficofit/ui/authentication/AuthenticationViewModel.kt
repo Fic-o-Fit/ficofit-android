@@ -13,7 +13,7 @@ class AuthenticationViewModel @Inject constructor(private val authRepository: Au
      * Interact with network / API
      */
 
-    suspend fun postUserRegister(email: String, password: String, name: String) =
+    suspend fun postUserRegister(name: String, email: String, password: String) =
         authRepository.postUserSignUp(name, email, password)
 
     suspend fun postUserSignIn(email: String, password: String) =

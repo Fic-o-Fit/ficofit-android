@@ -24,6 +24,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.fabIntent.setOnClickListener {
             Log.e("OnBoarding", "FAB clicked")
             startActivity(Intent(this, AuthenticationActivity::class.java))
+            finish()
         }
     }
 

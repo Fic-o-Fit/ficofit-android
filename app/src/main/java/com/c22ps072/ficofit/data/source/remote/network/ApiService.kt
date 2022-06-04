@@ -3,9 +3,8 @@ package com.c22ps072.ficofit.data.source.remote.network
 import com.c22ps072.ficofit.data.source.remote.response.ScoreResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignInResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignUpResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import com.c22ps072.ficofit.data.source.remote.response.UserPoint
+import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
@@ -28,10 +27,18 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/submit-score")
     suspend fun postSubmitScore(
-        @Field("Content-Type") contentType: String = "application/json",
-        @Field("name") name: String,
+        @Header("Authorization") token: String,
         @Field("score") score: Int,
     ) : ScoreResponse
 
+    @GET("/score")
+    suspend fun getAllScore(
+        @Header("Authorization") token: String
+    ): List<UserPoint>
+
+    @GET("/score/me")
+    suspend fun getMyScore(
+        @Header("Authorization") token: String
+    ): UserPoint
 
 }

@@ -42,13 +42,13 @@ class UsersPointListAdapter: RecyclerView.Adapter<UsersPointListAdapter.ViewHold
             2 -> {
                 holder.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
             }
-            else -> holder.ivTrophy.setPadding(10)
+            else -> holder.ivTrophy.setPadding(20)
         }
         
         holder.apply { 
             tvPosition.text = (position + 1).toString()
             tvUsername.text = item.name
-            tvPoints.text = item.highScore.toString()
+            tvPoints.text = item.score.toString()
         }
     }
 

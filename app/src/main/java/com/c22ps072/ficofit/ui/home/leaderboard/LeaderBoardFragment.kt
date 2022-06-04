@@ -9,8 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.c22ps072.ficofit.data.source.remote.response.UserPoint
 import com.c22ps072.ficofit.databinding.FragmentLeaderBoardBinding
+import dagger.hilt.android.AndroidEntryPoint
 import ui.home.leaderboard.UsersPointListAdapter
 
+@AndroidEntryPoint
 class LeaderBoardFragment : Fragment() {
     private var _binding: FragmentLeaderBoardBinding? = null
     private val binding get() = _binding!!
@@ -34,47 +36,16 @@ class LeaderBoardFragment : Fragment() {
         val usersPointListAdapter = UsersPointListAdapter()
         binding.rvUsersPoint.layoutManager = LinearLayoutManager(activity)
         binding.rvUsersPoint.adapter = usersPointListAdapter
-        usersPointListAdapter.setData(dummyData)
+//        usersPointListAdapter.setData(dummyData)
+        retrieveData()
+    }
+
+    private fun retrieveData() {
+        TODO("Not yet implemented")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    private val dummyData : ArrayList<UserPoint> =
-        arrayListOf(
-            UserPoint(
-                "reski",
-                100
-            ),
-            UserPoint(
-                "mulud",
-                99
-            ),
-            UserPoint(
-                "muchamad",
-                96
-            ),
-            UserPoint(
-                "reski-lagi",
-                80
-            ),
-            UserPoint(
-                "reski",
-                100
-            ),
-            UserPoint(
-                "mulud",
-                99
-            ),
-            UserPoint(
-                "muchamad",
-                96
-            ),
-            UserPoint(
-                "reski-lagi",
-                80
-            )
-        )
 }
