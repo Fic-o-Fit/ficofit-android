@@ -25,6 +25,9 @@ interface AuthDataSource {
     suspend fun postUserSignUp(
         name: String,
         email: String,
-        password: String
+        password: String,
+        gender: String,
+        weight: String,
+        height: String
     ): Flow<Result<SignUpResponse>>
 }

@@ -140,7 +140,7 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_next"
-            app:backgroundTint="?attr/colorSecondary"
+            app:backgroundTint="@color/accentColor"
             app:elevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_password"

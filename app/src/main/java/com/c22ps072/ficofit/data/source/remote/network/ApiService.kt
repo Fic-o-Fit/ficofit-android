@@ -21,7 +21,10 @@ interface ApiService {
         @Field("Content-Type") contentType: String = "application/json",
         @Field("name") name: String,
         @Field("email") email: String,
-        @Field("password") password: String
+        @Field("password") password: String,
+        @Field("gender") gender: String,
+        @Field("weight") weight: String,
+        @Field("height") height: String
     ): SignUpResponse
 
     @FormUrlEncoded

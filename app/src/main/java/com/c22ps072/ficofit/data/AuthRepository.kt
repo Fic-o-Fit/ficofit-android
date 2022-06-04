@@ -39,10 +39,20 @@ class AuthRepository @Inject constructor (
     override suspend fun postUserSignUp(
         name: String,
         email: String,
-        password: String
+        password: String,
+        gender: String,
+        weight: String,
+        height: String
     ): Flow<Result<SignUpResponse>> = flow {
         try {
-            val response = apiService.postUserSignUp(name=name, email=email, password=password)
+            val response = apiService.postUserSignUp(
+                name=name,
+                email=email,
+                password=password,
+                gender=gender,
+                weight=weight,
+                height=height
+            )
             emit(Result.success(response))
         } catch (e: Exception) {
             emit(Result.failure(e))

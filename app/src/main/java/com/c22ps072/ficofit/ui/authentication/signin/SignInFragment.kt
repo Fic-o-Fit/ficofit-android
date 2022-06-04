@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.fragment.findNavController
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentSignInBinding
@@ -20,6 +20,8 @@ import com.c22ps072.ficofit.ui.home.HomeActivity.Companion.EXTRA_TOKEN
 import com.c22ps072.ficofit.utils.Helpers.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import www.sanju.motiontoast.MotionToast
+import www.sanju.motiontoast.MotionToastStyle
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
@@ -42,7 +44,25 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSignIn.setOnClickListener {
-            signInAction()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+
+            var emptyField = false
+
+            if (email.isEmpty()) {
+                binding.etEmail.error = "Email is required"
+                binding.etEmail.requestFocus()
+                emptyField = true
+            }
+            if (password.isEmpty()) {
+                binding.etPassword.error = "Password is required"
+                binding.etPassword.requestFocus()
+                emptyField = true
+            }
+
+            if (!emptyField) {
+                signInAction(email, password)
+            }
         }
 
         binding.tvSignUp.setOnClickListener {
@@ -55,9 +75,7 @@ class SignInFragment : Fragment() {
         _binding = null
     }
 
-    private fun signInAction(){
-        val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
+    private fun signInAction(email: String, password: String){
         setLoading(true)
         lifecycleScope.launchWhenResumed {
             if (signInJob.isActive) signInJob.cancel()
@@ -81,12 +99,27 @@ class SignInFragment : Fragment() {
                                 }
                             }
                         }
-                        Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
+                        MotionToast.createToast(requireActivity(),
+                            "Sign In Successful",
+                            "You'll be redirected to Home Page",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.SHORT_DURATION,
+                            ResourcesCompat.getFont(requireActivity(), R.font.nunito)
+                        )
                     }
 
                     result.onFailure {
-                        Toast.makeText(context, "Sign In Failed", Toast.LENGTH_LONG).show()
+                        MotionToast.createToast(requireActivity(),
+                            "Sign In Failed",
+                            "Wrong email or password",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.SHORT_DURATION,
+                            ResourcesCompat.getFont(requireActivity(), R.font.nunito)
+                        )
                         setLoading(false)
+                        binding.etPassword.text = null
                     }
                 }
             }
