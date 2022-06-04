@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.c22ps072.ficofit.data.source.remote.response.UserPoint
 import com.c22ps072.ficofit.databinding.FragmentLeaderBoardBinding
+import com.c22ps072.ficofit.utils.Helpers.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -52,10 +53,12 @@ class LeaderBoardFragment : Fragment() {
     }
 
     private fun retrieveData() {
+        setLoading(true)
         lifecycleScope.launchWhenCreated {
             leaderBoardJob = launch {
                 viewModel.getUserToken().collect { token ->
                     viewModel.getLeaderBoard(token).collect { result ->
+                        setLoading(false)
                         result.onSuccess { usersPointList ->
                             Log.e("LeaderBoardFragment", usersPointList.toString())
                             usersPointListAdapter.setData(usersPointList as ArrayList<UserPoint>)
@@ -65,6 +68,17 @@ class LeaderBoardFragment : Fragment() {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun setLoading(state: Boolean){
+        binding.apply {
+            rvUsersPoint.isEnabled = !state
+            if (state) {
+                viewLoading.isVisible(true)
+            }else {
+                viewLoading.isVisible(false)
             }
         }
     }

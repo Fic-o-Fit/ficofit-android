@@ -4,8 +4,12 @@ import com.c22ps072.ficofit.data.source.local.PreferenceDataStore
 import com.c22ps072.ficofit.data.source.remote.network.ApiService
 import com.c22ps072.ficofit.data.source.remote.response.ScoreResponse
 import com.c22ps072.ficofit.data.source.remote.response.UserPoint
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
+import java.net.URLEncoder
 import javax.inject.Inject
 
 class FicoRepository @Inject constructor(
@@ -15,8 +19,12 @@ class FicoRepository @Inject constructor(
     override suspend fun getAllScore(token: String): Flow<Result<List<UserPoint>>> = flow {
         try {
             val strToken = "Bearer $token"
-            val response = apiService.getAllScore(strToken)
-            emit(Result.success(response))
+            dataStore.getUserEmail().collect {
+                val urlEncodedEmail = URLEncoder.encode(it, "UTF-8")
+                val strCookie = "emailSession=$urlEncodedEmail;jwt=$token"
+                val response = apiService.getAllScore(strToken, strCookie)
+                emit(Result.success(response))
+            }
         } catch (err: Exception) {
             emit(Result.failure(err))
         }

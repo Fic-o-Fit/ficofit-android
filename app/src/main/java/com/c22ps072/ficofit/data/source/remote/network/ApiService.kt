@@ -36,7 +36,8 @@ interface ApiService {
 
     @GET("/score")
     suspend fun getAllScore(
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
+        @Header("Cookie") cookie: String
     ): List<UserPoint>
 
     @GET("/score/me")

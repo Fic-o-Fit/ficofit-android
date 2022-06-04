@@ -92,6 +92,7 @@ class SignInFragment : Fragment() {
                             refreshToken.let { refreshToken ->
                                 viewModel.saveUserRefreshToken(refreshToken)
                             }.also {
+                                viewModel.saveEmailUser(email)
                                 Intent(requireContext(), HomeActivity::class.java).also { intent ->
                                     intent.putExtra(EXTRA_TOKEN,token)
                                     startActivity(intent)
