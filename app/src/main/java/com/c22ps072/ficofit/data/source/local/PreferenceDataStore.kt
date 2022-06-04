@@ -36,4 +36,10 @@ class PreferenceDataStore @Inject constructor(private val dataStore: DataStore<P
             preferences[USER_NAME_KEY] = name
         }
     }
+
+    suspend fun clearCache() {
+        dataStore.edit {
+            it.clear()
+        }
+    }
 }

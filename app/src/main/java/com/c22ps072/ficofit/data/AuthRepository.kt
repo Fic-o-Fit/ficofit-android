@@ -27,6 +27,8 @@ class AuthRepository @Inject constructor (
 
     override suspend fun saveUserName(name: String) = dataStore.saveUserName(name)
 
+    override suspend fun logout() = dataStore.clearCache()
+
     override suspend fun postUserLogin(email: String, password: String): Flow<Result<SignInResponse>> = flow {
         try {
             val response = apiService.postUserLogin(email=email, password=password)

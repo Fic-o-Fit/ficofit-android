@@ -9,8 +9,8 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.c22ps072.ficofit.ui.authentication.AuthenticationActivity
 import com.c22ps072.ficofit.ui.home.HomeActivity
+import com.c22ps072.ficofit.ui.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -30,7 +30,7 @@ class SplashScreenActivity : AppCompatActivity() {
             launch {
                 viewModel.getUserToken().collect { token ->
                     if (token.isEmpty()) {
-                        Intent(this@SplashScreenActivity, AuthenticationActivity::class.java).also { intent ->
+                        Intent(this@SplashScreenActivity, OnBoardingActivity::class.java).also { intent ->
                             startActivity(intent)
                             finish()
                         }

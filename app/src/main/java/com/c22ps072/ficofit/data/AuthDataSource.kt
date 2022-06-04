@@ -17,6 +17,8 @@ interface AuthDataSource {
 
     suspend fun saveUserName(name: String)
 
+    suspend fun logout()
+
     suspend fun postUserLogin(
         email: String,
         password: String

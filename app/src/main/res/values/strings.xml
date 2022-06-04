@@ -30,4 +30,6 @@
     <string name="leader_board">Leader Board</string>
     <string name="fun_games">Fun Games</string>
     <string name="calisthenic">Calisthenic</string>
+    <string name="other">Other</string>
+    <string name="logout">Logout</string>
 </resources>
