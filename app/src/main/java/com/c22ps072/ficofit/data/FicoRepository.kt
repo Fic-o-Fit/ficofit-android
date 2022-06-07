@@ -15,7 +15,7 @@ class FicoRepository @Inject constructor(
     ) : FicoDataSource {
     private fun setCookie(email: String, jwt: String) : String {
         val urlEncodedEmail = URLEncoder.encode(email, "UTF-8")
-        return "emailSession=$urlEncodedEmail;jwt=$jwt"
+        return "Content-Type=application%2Fjson; emailSession=$urlEncodedEmail; jwt=$jwt"
     }
 
     override suspend fun getAllScore(token: String): Flow<Result<List<UserPoint>>> = flow {
@@ -54,5 +54,9 @@ class FicoRepository @Inject constructor(
         }
     }
 
-    override suspend fun getUserToken(): Flow<String> = dataStore.getUserToken()
+    override fun getUserName(): Flow<String> = dataStore.getUserName()
+
+    override suspend fun saveUserName(name: String) = dataStore.saveUserName(name)
+
+    override  fun getUserToken(): Flow<String> = dataStore.getUserToken()
 }

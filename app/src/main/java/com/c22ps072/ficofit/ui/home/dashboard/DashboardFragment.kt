@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentDashboardBinding
+import com.c22ps072.ficofit.utils.Helpers.isVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -35,11 +36,21 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initCollect()
+
+        binding.cardLeaderBeard.setOnClickListener {
+            findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToLeaderBoardFragment())
+        }
+    }
+
+    private fun initCollect() {
         lifecycleScope.launchWhenCreated {
+            setLoading(true)
             dashboardJob = launch {
                 viewModel.getUserToken().collect { token ->
                     Log.e("Dashboard", "token : $token")
                     viewModel.getMyScore(token).collect { result ->
+                        setLoading(false)
                         result.onSuccess { value ->
                             binding.tvCounterStreak.text = value.position.toString()
                             when (value.position) {
@@ -48,20 +59,42 @@ class DashboardFragment : Fragment() {
                                 3 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
                                 else -> binding.ivTrophy.setImageResource(R.drawable.ic_medal)
                             }
+                            viewModel.saveUserName(value.name)
                         }
                     }
                 }
             }
         }
 
-        binding.cardLeaderBeard.setOnClickListener {
-            findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToLeaderBoardFragment())
+        lifecycleScope.launchWhenCreated {
+            launch {
+                viewModel.getUserName().collect {
+                    binding.tvName.text = it
+                }
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        dashboardJob.cancel()
+    }
+
+    private fun setLoading(state: Boolean){
+        binding.apply {
+            if (state) {
+                viewLoading.isVisible(true)
+                tvCounterStreak.visibility = View.INVISIBLE
+                ivTrophy.visibility = View.INVISIBLE
+                tvSubtitle.visibility = View.INVISIBLE
+            }else {
+                viewLoading.isVisible(false)
+                tvCounterStreak.visibility = View.VISIBLE
+                ivTrophy.visibility = View.VISIBLE
+                tvSubtitle.visibility = View.VISIBLE
+            }
+        }
     }
 
     companion object {

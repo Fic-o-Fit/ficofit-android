@@ -7,7 +7,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(private val ficoRepository: FicoRepository) : ViewModel() {
-    suspend fun getUserToken() = ficoRepository.getUserToken()
+    fun getUserToken() = ficoRepository.getUserToken()
 
     suspend fun getMyScore(token: String) = ficoRepository.getMyScore(token)
+
+    fun getUserName() = ficoRepository.getUserName()
+
+    suspend fun saveUserName(name: String) = ficoRepository.saveUserName(name)
 }
