@@ -111,6 +111,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
+                    android:id="@+id/iv_trophy"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_trophy_gold"
