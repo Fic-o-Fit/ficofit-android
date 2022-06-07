@@ -37,7 +37,7 @@
         <activity
             android:name=".ui.authentication.AuthenticationActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateVisible" />
         <activity
             android:name=".ui.onboarding.OnBoardingActivity"
             android:exported="false"/>

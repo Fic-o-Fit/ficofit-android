@@ -1,6 +1,7 @@
 package com.c22ps072.ficofit.data
 
 
+import android.util.Log
 import com.c22ps072.ficofit.data.source.local.PreferenceDataStore
 import com.c22ps072.ficofit.data.source.remote.network.ApiService
 import com.c22ps072.ficofit.data.source.remote.response.SignInResponse
@@ -38,6 +39,7 @@ class AuthRepository @Inject constructor (
             val response = apiService.postUserLogin(email=email, password=password)
             emit(Result.success(response))
         } catch (e: Exception) {
+            e.message?.let { Log.e("Login", it) }
             emit(Result.failure(e))
         }
     }.flowOn(Dispatchers.IO)
