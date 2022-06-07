@@ -1,6 +1,5 @@
 package ui.home.leaderboard
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -28,7 +27,6 @@ class UsersPointListAdapter: RecyclerView.Adapter<UsersPointListAdapter.ViewHold
         return ViewHolder(itemUsersPointBinding)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listUserPoint[position]
         
@@ -44,9 +42,11 @@ class UsersPointListAdapter: RecyclerView.Adapter<UsersPointListAdapter.ViewHold
             }
             else -> holder.ivTrophy.setPadding(20)
         }
+
+        Log.e("ADAPTER", "position: $position")
         
         holder.apply { 
-            tvPosition.text = (position + 1).toString()
+            tvPosition.text = item.position.toString()
             tvUsername.text = item.name
             tvPoints.text = item.score.toString()
         }

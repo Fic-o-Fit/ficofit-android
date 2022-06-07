@@ -12,4 +12,6 @@ interface FicoDataSource {
 
     suspend fun postSubmitScore(token: String, score: Int) : Flow<Result<ScoreResponse>>
 
+    suspend fun getUserToken() : Flow<String>
+
 }

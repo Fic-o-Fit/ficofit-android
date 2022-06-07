@@ -27,6 +27,12 @@ class AuthRepository @Inject constructor (
 
     override suspend fun saveUserName(name: String) = dataStore.saveUserName(name)
 
+    override fun getUserEmail(): Flow<String> = dataStore.getUserEmail()
+
+    override suspend fun saveUserEmail(email: String) = dataStore.saveUserEmail(email)
+
+    override suspend fun logout() = dataStore.clearCache()
+
     override suspend fun postUserLogin(email: String, password: String): Flow<Result<SignInResponse>> = flow {
         try {
             val response = apiService.postUserLogin(email=email, password=password)
@@ -39,10 +45,20 @@ class AuthRepository @Inject constructor (
     override suspend fun postUserSignUp(
         name: String,
         email: String,
-        password: String
+        password: String,
+        gender: String,
+        weight: String,
+        height: String
     ): Flow<Result<SignUpResponse>> = flow {
         try {
-            val response = apiService.postUserSignUp(name=name, email=email, password=password)
+            val response = apiService.postUserSignUp(
+                name=name,
+                email=email,
+                password=password,
+                gender=gender,
+                weight=weight,
+                height=height
+            )
             emit(Result.success(response))
         } catch (e: Exception) {
             emit(Result.failure(e))

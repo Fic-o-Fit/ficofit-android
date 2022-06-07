@@ -13,8 +13,22 @@ class AuthenticationViewModel @Inject constructor(private val authRepository: Au
      * Interact with network / API
      */
 
-    suspend fun postUserRegister(name: String, email: String, password: String) =
-        authRepository.postUserSignUp(name, email, password)
+    suspend fun postUserRegister(
+        name: String,
+        email: String,
+        password: String,
+        gender: String,
+        weight: String,
+        height: String
+    ) =
+        authRepository.postUserSignUp(
+            name,
+            email,
+            password,
+            gender,
+            weight,
+            height
+        )
 
     suspend fun postUserSignIn(email: String, password: String) =
         authRepository.postUserLogin(email, password)
@@ -38,6 +52,12 @@ class AuthenticationViewModel @Inject constructor(private val authRepository: Au
     suspend fun saveNameUser(name: String) {
         viewModelScope.launch {
             authRepository.saveUserName(name)
+        }
+    }
+
+    suspend fun saveEmailUser(email: String) {
+        viewModelScope.launch {
+            authRepository.saveUserEmail(email)
         }
     }
 }

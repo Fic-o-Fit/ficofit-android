@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ScrollView
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,7 +30,7 @@ class DialogProfileFragment : Fragment() {
 
     private val binding get() = _binding!!
     private val args: DialogProfileFragmentArgs by navArgs()
-    private var gender: String ? = null
+    private lateinit var gender: String
     private lateinit var weight: String
     private lateinit var height: String
 
@@ -87,34 +86,32 @@ class DialogProfileFragment : Fragment() {
                 binding.rbFemale.id -> gender = "P"
             }
 
-            if (gender != null) {
-                initStartDelay = 0
-                binding.tvHeight.text = getString(R.string.height, simpleName)
-                setObjectAnimator(binding.tvHeight, 0)
-                binding.textInputGroup.visibility = View.VISIBLE
+            initStartDelay = 0
+            binding.tvHeight.text = getString(R.string.height, simpleName)
+            setObjectAnimator(binding.tvHeight, 0)
+            binding.textInputGroup.visibility = View.VISIBLE
 
-                binding.icSend.setOnClickListener {
-                    height = binding.etInput.text.toString().trim()
-                    if (height.isNotEmpty()) {
-                        binding.tvHeightAnswer.text = "$height CM"
-                        setObjectAnimator(binding.tvHeightAnswer, 0)
-                        binding.etInput.text = null
+            binding.icSend.setOnClickListener {
+                height = binding.etInput.text.toString().trim()
+                if (height.isNotEmpty()) {
+                    binding.tvHeightAnswer.text = "$height CM"
+                    setObjectAnimator(binding.tvHeightAnswer, 0)
+                    binding.etInput.text = null
 
-                        binding.tvWeight.text = getString(R.string.weight, simpleName)
-                        setObjectAnimator(binding.tvWeight, 0)
-                        binding.icSend.setOnClickListener {
-                             weight = binding.etInput.text.toString().trim()
-                            if (weight.isNotEmpty()) {
-                                binding.tvWeightAnswer.text = "$weight Kg"
-                                setObjectAnimator(binding.tvWeightAnswer, 0)
-                                binding.etInput.text = null
+                    binding.tvWeight.text = getString(R.string.weight, simpleName)
+                    setObjectAnimator(binding.tvWeight, 0)
+                    binding.icSend.setOnClickListener {
+                         weight = binding.etInput.text.toString().trim()
+                        if (weight.isNotEmpty()) {
+                            binding.tvWeightAnswer.text = "$weight Kg"
+                            setObjectAnimator(binding.tvWeightAnswer, 0)
+                            binding.etInput.text = null
 
-                                setObjectAnimator(binding.tvClosing, 0)
-                                setObjectAnimator(binding.btnContinue, 1000)
+                            setObjectAnimator(binding.tvClosing, 0)
+                            setObjectAnimator(binding.btnContinue, 1000)
 
-                                binding.btnContinue.setOnClickListener {
-                                    signUpAction()
-                                }
+                            binding.btnContinue.setOnClickListener {
+                                signUpAction()
                             }
                         }
                     }
@@ -129,22 +126,37 @@ class DialogProfileFragment : Fragment() {
             if (dialogJob.isActive) dialogJob.cancel()
 
             dialogJob = launch {
-                viewModel.postUserRegister(args.name, args.email, args.password).collect{ result ->
+                viewModel.postUserRegister(
+                    args.name,
+                    args.email,
+                    args.password,
+                    gender,
+                    weight,
+                    height
+                ).collect{ result ->
+
                     setLoading(false)
                     result.onSuccess {
                         MotionToast.createToast(requireActivity(),
-                            "SignUp Successful",
+                            "Sign Up Successful",
                             "You'll be redirected to Home Page",
                             MotionToastStyle.SUCCESS,
                             MotionToast.GRAVITY_BOTTOM,
-                            MotionToast.SHORT_DURATION,
+                            MotionToast.LONG_DURATION,
                             ResourcesCompat.getFont(requireActivity(), R.font.nunito)
                         )
 
                         signInAction()
                     }
                     result.onFailure {
-                        Toast.makeText(requireContext(), "Sign Up Failed", Toast.LENGTH_LONG).show()
+                        MotionToast.createToast(requireActivity(),
+                            "Sign Up Failed",
+                            "Please try again",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(requireActivity(), R.font.nunito)
+                        )
                     }
                 }
             }
@@ -169,6 +181,7 @@ class DialogProfileFragment : Fragment() {
                             refreshToken.let { refreshToken ->
                                 viewModel.saveUserRefreshToken(refreshToken)
                             }.also {
+                                viewModel.saveEmailUser(args.email)
                                 Intent(requireContext(), HomeActivity::class.java).also { intent ->
                                     intent.putExtra(HomeActivity.EXTRA_TOKEN,token)
                                     startActivity(intent)
@@ -179,7 +192,14 @@ class DialogProfileFragment : Fragment() {
                     }
                     result.onFailure {
                         setLoading(false)
-                        Toast.makeText(requireContext(), "Sign In Failed", Toast.LENGTH_LONG).show()
+                        MotionToast.createToast(requireActivity(),
+                            "Sign In Failed",
+                            "Please try again",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.SHORT_DURATION,
+                            ResourcesCompat.getFont(requireActivity(), R.font.nunito)
+                        )
                     }
                 }
             }

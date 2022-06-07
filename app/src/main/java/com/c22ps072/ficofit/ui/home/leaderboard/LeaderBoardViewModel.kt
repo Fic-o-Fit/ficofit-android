@@ -9,11 +9,7 @@ import javax.inject.Inject
 class LeaderBoardViewModel @Inject constructor(
     private val ficoRepo: FicoRepository
 ) : ViewModel() {
-    private var token: String? = null
-
-    init {
-
-    }
+    suspend fun getUserToken() = ficoRepo.getUserToken()
 
     suspend fun getLeaderBoard(token: String) = ficoRepo.getAllScore(token)
 

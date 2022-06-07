@@ -18,7 +18,7 @@ class DiffUtilCallback(
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return when {
             oldList[oldItemPosition].name != newList[newItemPosition].name -> false
-            oldList[oldItemPosition].highScore != newList[newItemPosition].highScore -> false
+            oldList[oldItemPosition].score != newList[newItemPosition].score -> false
             else -> true
         }
     }
