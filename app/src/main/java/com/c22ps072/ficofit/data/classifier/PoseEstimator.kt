@@ -183,12 +183,12 @@ class PoseEstimator(assetManager: AssetManager) {
     }
 
     private fun determineRectF(
-        keypoints: List<KeyPoints>,
+        keyPoints: List<KeyPoints>,
         imageWidth: Int,
         imageHeight: Int
     ): RectF {
         val targetKeypoints = mutableListOf<KeyPoints>()
-        keypoints.forEach {
+        keyPoints.forEach {
             targetKeypoints.add(
                 KeyPoints(
                     it.bodyPart,
@@ -200,7 +200,7 @@ class PoseEstimator(assetManager: AssetManager) {
                 )
             )
         }
-        if (torsoVisible(keypoints)) {
+        if (torsoVisible(keyPoints)) {
             val centerX =
                 (targetKeypoints[BodyPart.LEFT_HIP.position].coordinate.x +
                         targetKeypoints[BodyPart.RIGHT_HIP.position].coordinate.x) / 2f
@@ -209,7 +209,7 @@ class PoseEstimator(assetManager: AssetManager) {
                         targetKeypoints[BodyPart.RIGHT_HIP.position].coordinate.y) / 2f
 
             val torsoAndBodyDistances =
-                determineTorsoAndBodyDistances(keypoints, targetKeypoints, centerX, centerY)
+                determineTorsoAndBodyDistances(keyPoints, targetKeypoints, centerX, centerY)
 
             val list = listOf(
                 torsoAndBodyDistances.maxTorsoXDistance * TORSO_EXPANSION_RATIO,
@@ -240,8 +240,8 @@ class PoseEstimator(assetManager: AssetManager) {
     }
 
     private fun determineTorsoAndBodyDistances(
-        keypoints: List<KeyPoints>,
-        targetKeypoints: List<KeyPoints>,
+        keyPoints: List<KeyPoints>,
+        targetKeyPoints: List<KeyPoints>,
         centerX: Float,
         centerY: Float
     ): TorsoAndBodyDistance {
@@ -255,18 +255,18 @@ class PoseEstimator(assetManager: AssetManager) {
         var maxTorsoYRange = 0f
         var maxTorsoXRange = 0f
         torsoJoints.forEach { joint ->
-            val distY = abs(centerY - targetKeypoints[joint].coordinate.y)
-            val distX = abs(centerX - targetKeypoints[joint].coordinate.x)
+            val distY = abs(centerY - targetKeyPoints[joint].coordinate.y)
+            val distX = abs(centerX - targetKeyPoints[joint].coordinate.x)
             if (distY > maxTorsoYRange) maxTorsoYRange = distY
             if (distX > maxTorsoXRange) maxTorsoXRange = distX
         }
 
         var maxBodyYRange = 0f
         var maxBodyXRange = 0f
-        for (joint in keypoints.indices) {
-            if (keypoints[joint].score < MIN_CROP_KEYPOINT_SCORE) continue
-            val distY = abs(centerY - keypoints[joint].coordinate.y)
-            val distX = abs(centerX - keypoints[joint].coordinate.x)
+        for (joint in keyPoints.indices) {
+            if (keyPoints[joint].score < MIN_CROP_KEYPOINT_SCORE) continue
+            val distY = abs(centerY - keyPoints[joint].coordinate.y)
+            val distX = abs(centerX - keyPoints[joint].coordinate.x)
 
             if (distY > maxBodyYRange) maxBodyYRange = distY
             if (distX > maxBodyXRange) maxBodyXRange = distX

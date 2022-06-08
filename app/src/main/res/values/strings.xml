@@ -32,4 +32,6 @@
     <string name="calisthenic">Calisthenic</string>
     <string name="other">Other</string>
     <string name="logout">Logout</string>
+    <string name="push_up">Push Up: %s</string>
+    <string name="sit_up">Sit Up: %s</string>
 </resources>
