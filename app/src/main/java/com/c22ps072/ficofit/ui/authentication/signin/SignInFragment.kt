@@ -86,18 +86,17 @@ class SignInFragment : Fragment() {
                         credentials.apply {
                             Log.d("SIGN IN", "token : $token")
                             Log.d("SIGN IN", "refreshToken : $refreshToken")
+                            viewModel.saveEmailUser(email)
                             token.let { token->
                                 viewModel.saveUserToken(token)
                             }
                             refreshToken.let { refreshToken ->
                                 viewModel.saveUserRefreshToken(refreshToken)
-                            }.also {
-                                viewModel.saveEmailUser(email)
-                                Intent(requireContext(), HomeActivity::class.java).also { intent ->
-                                    intent.putExtra(EXTRA_TOKEN,token)
-                                    startActivity(intent)
-                                    requireActivity().finish()
-                                }
+                            }
+                            Intent(requireContext(), HomeActivity::class.java).also { intent ->
+                                intent.putExtra(EXTRA_TOKEN,token)
+                                startActivity(intent)
+                                requireActivity().finish()
                             }
                         }
                         MotionToast.createToast(requireActivity(),

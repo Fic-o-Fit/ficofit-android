@@ -9,6 +9,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.c22ps072.ficofit.service.RefreshTokenService
 import com.c22ps072.ficofit.ui.home.HomeActivity
 import com.c22ps072.ficofit.ui.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,7 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupView()
         handlerIntent()
+
     }
 
     private fun handlerIntent() {

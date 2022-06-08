@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentDashboardBinding
 import com.c22ps072.ficofit.utils.Helpers.isVisible
+import com.c22ps072.ficofit.utils.Helpers.setOrdinal
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -22,7 +22,6 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: DashboardViewModel by viewModels()
-    private var dashboardJob: Job = Job()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,41 +43,31 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initCollect() {
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             setLoading(true)
-            dashboardJob = launch {
-                viewModel.getUserToken().collect { token ->
-                    Log.e("Dashboard", "token : $token")
-                    viewModel.getMyScore(token).collect { result ->
-                        setLoading(false)
-                        result.onSuccess { value ->
-                            binding.tvCounterStreak.text = value.position.toString()
-                            when (value.position) {
-                                1 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_gold)
-                                2 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_silver)
-                                3 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
-                                else -> binding.ivTrophy.setImageResource(R.drawable.ic_medal)
-                            }
-                            viewModel.saveUserName(value.name)
+            viewModel.getUserToken().collect { token ->
+                Log.e("Dashboard", "token : $token")
+                viewModel.getMyScore(token).collect { result ->
+                    setLoading(false)
+                    result.onSuccess { value ->
+                        binding.tvCounterStreak.text = value.position.setOrdinal()
+                        when (value.position) {
+                            1 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_gold)
+                            2 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_silver)
+                            3 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
+                            else -> binding.ivTrophy.setImageResource(R.drawable.ic_medal)
                         }
+                        viewModel.saveUserName(value.name)
                     }
                 }
             }
         }
 
-        lifecycleScope.launchWhenCreated {
-            launch {
-                viewModel.getUserName().collect {
-                    binding.tvName.text = it
-                }
+        lifecycleScope.launch {
+            viewModel.getUserName().collect {
+                binding.tvName.text = it
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        dashboardJob.cancel()
     }
 
     private fun setLoading(state: Boolean){

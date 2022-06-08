@@ -34,10 +34,10 @@ class SettingsFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             lifecycleScope.launch {
-                viewModel.logout()
                 val intent = Intent(requireActivity(), AuthenticationActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
+                viewModel.logout()
             }
         }
     }
