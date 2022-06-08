@@ -2,9 +2,9 @@
 
     <!-- Main Color -->
     <color name="baseColor">#FFFFFF</color>
-    <color name="primaryColor">#551FFF</color>
-    <color name="secondaryColor">#00B7FE</color>
-    <color name="accentColor">#FF6A00</color>
+    <color name="primaryColor">#173033</color>
+    <color name="secondaryColor">#B9E4EF</color>
+    <color name="accentColor">#F1654F</color>
 
     <!-- Shades of Grey Color -->
     <color name="darkGrey">#92959E</color>
