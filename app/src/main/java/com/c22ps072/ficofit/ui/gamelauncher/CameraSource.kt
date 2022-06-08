@@ -1,4 +1,4 @@
-package com.c22ps072.ficofit.ui
+package com.c22ps072.ficofit.ui.gamelauncher
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -143,11 +143,9 @@ class CameraSource(
     fun prepareCamera() {
         for (cameraId in cameraManager.cameraIdList) {
             val characteristics = cameraManager.getCameraCharacteristics(cameraId)
-
-            // ini samplenya cm buat kamera blkg, tar tambahin untuk frontcam
             val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
             if (cameraDirection != null &&
-                cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
+                cameraDirection == CameraCharacteristics.LENS_FACING_BACK
             ) {
                 continue
             }
@@ -212,7 +210,7 @@ class CameraSource(
     }
 
     private fun processImage(bitmap: Bitmap) {
-        val poses = mutableListOf<Pose>()  //tadinya ada opsi multipose jd pke list
+        val poses = mutableListOf<Pose>()
         var poseIsCorrect: Boolean = false
 
         synchronized(lock) {

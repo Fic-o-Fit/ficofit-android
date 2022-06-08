@@ -19,10 +19,10 @@ class CalisthenicsClassifier(assetManager: AssetManager, calisthenicType: String
         tfliteOptions.setNumThreads(5)
         MODEL_TYPE = calisthenicType
         var modelPath = when (MODEL_TYPE) {
-            "pushup" -> {
+            "push" -> {
                 "pushup-model-31may22.tflite"
             }
-            "situp" -> {
+            "sit" -> {
                 "situp-model-31may22.tflite"
             }
             else -> {
@@ -48,12 +48,16 @@ class CalisthenicsClassifier(assetManager: AssetManager, calisthenicType: String
         val outputTensor = FloatArray(OUTPUT[1])
         INTERPRETER.run(arrayOf(inputVector), arrayOf(outputTensor))
 
-        if(MODEL_TYPE == "pushup"){
-            return (outputTensor[1] >= threshold) || (outputTensor[2] >= threshold)
-        }else if(MODEL_TYPE == "situp"){
-            return (outputTensor[1] >= threshold)
-        }else{
-            return (outputTensor[1] >= threshold) || (outputTensor[2] >= threshold)
+        return when (MODEL_TYPE) {
+            "push" -> {
+                (outputTensor[1] >= threshold) || (outputTensor[2] >= threshold)
+            }
+            "sit" -> {
+                (outputTensor[1] >= threshold)
+            }
+            else -> {
+                (outputTensor[1] >= threshold) || (outputTensor[2] >= threshold)
+            }
         }
 
     }
