@@ -1,17 +1,27 @@
 package com.c22ps072.ficofit.ui.home.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentDashboardBinding
+import com.c22ps072.ficofit.utils.Helpers.isVisible
+import com.c22ps072.ficofit.utils.Helpers.setOrdinal
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,14 +35,55 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initCollect()
+
         binding.cardLeaderBeard.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToLeaderBoardFragment())
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun initCollect() {
+        lifecycleScope.launch {
+            setLoading(true)
+            viewModel.getUserToken().collect { token ->
+                Log.e("Dashboard", "token : $token")
+                viewModel.getMyScore(token).collect { result ->
+                    setLoading(false)
+                    result.onSuccess { value ->
+                        binding.tvCounterStreak.text = value.position.setOrdinal()
+                        when (value.position) {
+                            1 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_gold)
+                            2 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_silver)
+                            3 -> binding.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
+                            else -> binding.ivTrophy.setImageResource(R.drawable.ic_medal)
+                        }
+                        viewModel.saveUserName(value.name)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.getUserName().collect {
+                binding.tvName.text = it
+            }
+        }
+    }
+
+    private fun setLoading(state: Boolean){
+        binding.apply {
+            if (state) {
+                viewLoading.isVisible(true)
+                tvCounterStreak.visibility = View.INVISIBLE
+                ivTrophy.visibility = View.INVISIBLE
+                tvSubtitle.visibility = View.INVISIBLE
+            }else {
+                viewLoading.isVisible(false)
+                tvCounterStreak.visibility = View.VISIBLE
+                ivTrophy.visibility = View.VISIBLE
+                tvSubtitle.visibility = View.VISIBLE
+            }
+        }
     }
 
     companion object {
