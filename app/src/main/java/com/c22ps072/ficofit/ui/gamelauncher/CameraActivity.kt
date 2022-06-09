@@ -38,7 +38,7 @@ class CameraActivity : AppCompatActivity() {
 
     private lateinit var surfaceView: SurfaceView
     private lateinit var tvCounter: TextView
-    private lateinit var tvTimer: TextView
+//    private lateinit var tvTimer: TextView
     private var cameraSource: CameraSource? = null
 
     override fun onRequestPermissionsResult(
@@ -68,6 +68,8 @@ class CameraActivity : AppCompatActivity() {
 
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        surfaceView = binding.surfaceView
+        tvCounter = binding.tvCounter
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -77,28 +79,31 @@ class CameraActivity : AppCompatActivity() {
             )
         }
 
-        cameraExecutor = Executors.newSingleThreadExecutor()
-        CameraSelector.DEFAULT_FRONT_CAMERA
+        history = mutableListOf<Int>()
+        numFrameRequirement= 5
+        downDone = false
+        counter = 0
+//        currentFps = 20
 
     }
 
     override fun onStart() {
         super.onStart()
+        cameraClassification()
     }
 
     public override fun onResume() {
         super.onResume()
+        cameraSource?.resume()
         hideSystemUI()
     }
 
     override fun onPause() {
         super.onPause()
+        cameraSource?.close()
+        cameraSource = null
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        cameraExecutor.shutdown()
-    }
 
     private fun cameraClassification() {
         if (allPermissionsGranted()) {
@@ -115,7 +120,7 @@ class CameraActivity : AppCompatActivity() {
                         ) {
                             when(EXTRA_CLASSIFICATION){
                                 "sit" -> {
-                                    tvCounter.text =getString(R.string.push_up, counter.toString())
+                                    tvCounter.text =getString(R.string.sit_up, counter.toString())
                                     if (poseIsCorrect && bodyIsVisible(pose)){
                                         var shoulderY = 0
                                         shoulderY = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x < pose.keyPoints[BodyPart.RIGHT_ANKLE.position].coordinate.x){
