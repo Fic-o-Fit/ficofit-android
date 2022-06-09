@@ -34,4 +34,7 @@
     <string name="logout">Logout</string>
     <string name="push_up">Push Up: %s</string>
     <string name="sit_up">Sit Up: %s</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="calories_burn">Calories Burn</string>
+    <string name="games_has_been_play">Games Has Been Play</string>
 </resources>

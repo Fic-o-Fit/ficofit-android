@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:text="Good Morning"
+                        android:text="@string/good_morning"
                         android:textAllCaps="true"
                         tools:ignore="RelativeOverlap" />
 
@@ -52,18 +52,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/toolbar_title_secondary"
                         android:layout_alignParentStart="true"
-                        android:text="Your Name"
-                        android:textColor="@color/secondaryColor" />
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/btn_show_information"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_centerVertical="true"-->
-<!--                        android:layout_marginEnd="16dp"-->
-<!--                        android:background="@null"-->
-<!--                        android:src="@drawable/ic_outline_info_24" />-->
+                        android:textStyle="bold"
+                        tools:text="Your Name"
+                        android:textColor="@color/primaryColor" />
 
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
@@ -95,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="1st"
+                    tools:text="1st"
                     app:layout_constraintBottom_toTopOf="@+id/tv_subtitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -106,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Your Current Position"
+                    tools:text="Your Current Position"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -181,7 +172,7 @@
                     style="@style/Text.Card.Description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calories Burn" />
+                    android:text="@string/calories_burn" />
 
             </LinearLayout>
 
@@ -212,7 +203,7 @@
                     style="@style/Text.Card.Description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Games Has Been Play" />
+                    android:text="@string/games_has_been_play" />
 
             </LinearLayout>
 

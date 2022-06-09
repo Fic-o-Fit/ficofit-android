@@ -42,6 +42,13 @@ class LeaderBoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bottomNav = requireActivity().findViewById<View>(R.id.bottomAppBar)
+        val fabGame = requireActivity().findViewById<View>(R.id.btn_game)
+        View.GONE.let {
+            bottomNav.visibility = it
+            fabGame.visibility = it
+        }
+
         binding.ivBack.setOnClickListener {
             findNavController().navigate(LeaderBoardFragmentDirections.actionLeaderBoardFragmentToNavigationDashboard())
         }
