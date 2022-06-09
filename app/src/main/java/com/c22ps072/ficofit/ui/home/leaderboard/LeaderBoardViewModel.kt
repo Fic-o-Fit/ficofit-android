@@ -11,7 +11,7 @@ class LeaderBoardViewModel @Inject constructor(
     private val ficoRepo: FicoRepository,
     private val authRepository: AuthRepository
 ) : ViewModel() {
-    suspend fun getUserToken() = ficoRepo.getUserToken()
+    fun getUserToken() = ficoRepo.getUserToken()
 
     suspend fun getLeaderBoard(token: String) = ficoRepo.getAllScore(token)
 
