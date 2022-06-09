@@ -87,6 +87,7 @@ class SignInFragment : Fragment() {
                             Log.d("SIGN IN", "token : $token")
                             Log.d("SIGN IN", "refreshToken : $refreshToken")
                             viewModel.saveEmailUser(email)
+                            viewModel.saveUserPassword(password)
                             token.let { token->
                                 viewModel.saveUserToken(token)
                             }

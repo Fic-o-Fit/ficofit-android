@@ -17,6 +17,10 @@ interface AuthDataSource {
 
     suspend fun saveUserEmail(email: String)
 
+    fun getUserPassword() : Flow<String>
+
+    suspend fun saveUserPassword(password: String)
+
     suspend fun logout()
 
     suspend fun postUserLogin(
