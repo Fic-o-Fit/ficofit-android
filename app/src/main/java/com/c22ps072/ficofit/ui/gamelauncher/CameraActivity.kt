@@ -1,6 +1,7 @@
 package com.c22ps072.ficofit.ui.gamelauncher
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -31,13 +32,14 @@ import java.util.concurrent.Executors
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var type: String
     var history = mutableListOf<Int>()
     var numFrameRequirement: Int = 5
     var downDone: Boolean = false
     var counter: Int = 0
 
     private lateinit var surfaceView: SurfaceView
-    private lateinit var tvCounter: TextView
+//    private lateinit var tvCounter: TextView
 //    private lateinit var tvTimer: TextView
     private var cameraSource: CameraSource? = null
 
@@ -69,7 +71,9 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
         surfaceView = binding.surfaceView
-        tvCounter = binding.tvCounter
+//        tvCounter = binding.tvCounter
+
+        type = intent.getStringExtra(EXTRA_CLASSIFICATION).toString()
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -118,9 +122,14 @@ class CameraActivity : AppCompatActivity() {
                             poseIsCorrect: Boolean,
                             pose: Pose
                         ) {
-                            when(EXTRA_CLASSIFICATION){
+
+
+                            when(type){
                                 "sit" -> {
-                                    tvCounter.text =getString(R.string.sit_up, counter.toString())
+                                    this@CameraActivity.runOnUiThread {
+                                        binding.tvCounter.text = getString(R.string.sit_up, counter.toString())
+                                    }
+//                            binding.tvCounter.text = "Test
                                     if (poseIsCorrect && bodyIsVisible(pose)){
                                         var shoulderY = 0
                                         shoulderY = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x < pose.keyPoints[BodyPart.RIGHT_ANKLE.position].coordinate.x){
@@ -146,7 +155,9 @@ class CameraActivity : AppCompatActivity() {
                                     }
                                 }
                                 "push" -> {
-                                    tvCounter.text =getString(R.string.push_up, counter.toString())
+                                    this@CameraActivity.runOnUiThread {
+                                        binding.tvCounter.text = getString(R.string.push_up, counter.toString())
+                                    }
                                     if (poseIsCorrect && bodyIsVisible(pose)){
                                         var shoulderY = 0
                                         shoulderY = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x > pose.keyPoints[BodyPart.RIGHT_KNEE.position].coordinate.x){
@@ -179,7 +190,7 @@ class CameraActivity : AppCompatActivity() {
                         prepareCamera()
                     }
 
-                cameraSource?.setClassifier(CalisthenicsClassifier(this.assets, if (EXTRA_CLASSIFICATION == "sit") "sit" else "push"))
+                cameraSource?.setClassifier(CalisthenicsClassifier(this.assets, if (type == "sit") "sit" else "push"))
                 lifecycleScope.launch(Dispatchers.Main) {
                     cameraSource?.initCamera()
                 }
