@@ -49,12 +49,6 @@ class AuthenticationViewModel @Inject constructor(private val authRepository: Au
         }
     }
 
-    suspend fun saveNameUser(name: String) {
-        viewModelScope.launch {
-            authRepository.saveUserName(name)
-        }
-    }
-
     suspend fun saveEmailUser(email: String) {
         viewModelScope.launch {
             authRepository.saveUserEmail(email)

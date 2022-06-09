@@ -18,7 +18,13 @@
         android:id="@+id/navigation_setting"
         android:name="com.c22ps072.ficofit.ui.home.setting.SettingsFragment"
         android:label="@string/str_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_setting_to_logoutDialog"
+            app:destination="@id/logoutDialog"
+            app:enterAnim="@android:anim/bounce_interpolator"
+            app:exitAnim="@android:anim/bounce_interpolator" />
+    </fragment>
     <fragment
         android:id="@+id/leaderBoardFragment"
         android:name="com.c22ps072.ficofit.ui.home.leaderboard.LeaderBoardFragment"
@@ -28,4 +34,8 @@
             android:id="@+id/action_leaderBoardFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+    <dialog
+        android:id="@+id/logoutDialog"
+        android:name="com.c22ps072.ficofit.ui.home.setting.LogoutDialog"
+        android:label="LogoutDialog" />
 </navigation>

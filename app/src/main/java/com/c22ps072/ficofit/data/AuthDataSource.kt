@@ -13,10 +13,6 @@ interface AuthDataSource {
 
     suspend fun saveUserRefreshToken(token: String)
 
-    fun getUserName(): Flow<String>
-
-    suspend fun saveUserName(name: String)
-
     fun getUserEmail(): Flow<String>
 
     suspend fun saveUserEmail(email: String)

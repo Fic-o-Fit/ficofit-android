@@ -10,7 +10,6 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/login")
     suspend fun postUserLogin(
-        @Field("Content-Type") contentType: String = "application/json",
         @Field("email") email: String,
         @Field("password") password: String
     ): SignInResponse
@@ -18,7 +17,6 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/signup")
     suspend fun postUserSignUp(
-        @Field("Content-Type") contentType: String = "application/json",
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
@@ -31,6 +29,7 @@ interface ApiService {
     @POST("/submit-score")
     suspend fun postSubmitScore(
         @Header("Authorization") token: String,
+        @Header("Cookie") cookie: String,
         @Field("score") score: Int,
     ) : ScoreResponse
 
@@ -42,7 +41,8 @@ interface ApiService {
 
     @GET("/score/me")
     suspend fun getMyScore(
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
+        @Header("Cookie") cookie: String
     ): UserPoint
 
 }

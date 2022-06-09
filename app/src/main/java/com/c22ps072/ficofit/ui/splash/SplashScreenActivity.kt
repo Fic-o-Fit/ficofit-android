@@ -9,24 +9,33 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.c22ps072.ficofit.databinding.ActivitySplashScreenBinding
 import com.c22ps072.ficofit.ui.home.HomeActivity
 import com.c22ps072.ficofit.ui.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashScreenBinding
     private val viewModel: SplashScreenViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setupView()
         handlerIntent()
+
     }
 
     private fun handlerIntent() {
         lifecycleScope.launchWhenCreated {
+            delay(1000)
             launch {
                 viewModel.getUserToken().collect { token ->
                     if (token.isEmpty()) {
