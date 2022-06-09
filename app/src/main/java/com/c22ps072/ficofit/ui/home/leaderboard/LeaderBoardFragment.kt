@@ -30,6 +30,9 @@ class LeaderBoardFragment : Fragment() {
     private val viewModel: LeaderBoardViewModel by viewModels()
     private var leaderBoardJob: Job = Job()
 
+    private lateinit var bottomNav: View
+    private lateinit var fabGame: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,8 +45,8 @@ class LeaderBoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomNav = requireActivity().findViewById<View>(R.id.bottomAppBar)
-        val fabGame = requireActivity().findViewById<View>(R.id.btn_game)
+        bottomNav = requireActivity().findViewById<View>(R.id.bottomAppBar)
+        fabGame = requireActivity().findViewById<View>(R.id.btn_game)
         View.GONE.let {
             bottomNav.visibility = it
             fabGame.visibility = it
@@ -93,6 +96,10 @@ class LeaderBoardFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        View.VISIBLE.let {
+            bottomNav.visibility = it
+            fabGame.visibility = it
+        }
         _binding = null
     }
 }

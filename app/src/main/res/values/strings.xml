@@ -37,4 +37,5 @@
     <string name="good_morning">Good Morning</string>
     <string name="calories_burn">Calories Burn</string>
     <string name="games_has_been_play">Games Has Been Play</string>
+    <string name="your_current_position">Your Current Position</string>
 </resources>
