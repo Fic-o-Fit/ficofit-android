@@ -1,7 +1,10 @@
 package com.c22ps072.ficofit.ui.gamelauncher
 
 import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +14,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
@@ -24,10 +28,12 @@ import com.c22ps072.ficofit.data.classifier.PoseEstimator
 import com.c22ps072.ficofit.data.source.model.BodyPart
 import com.c22ps072.ficofit.data.source.model.Pose
 import com.c22ps072.ficofit.databinding.ActivityCameraBinding
+import com.c22ps072.ficofit.service.TimeService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.math.roundToInt
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
@@ -39,9 +45,11 @@ class CameraActivity : AppCompatActivity() {
     var counter: Int = 0
 
     private lateinit var surfaceView: SurfaceView
-//    private lateinit var tvCounter: TextView
-//    private lateinit var tvTimer: TextView
+    private var timerStarted = false
+    private lateinit var serviceIntent: Intent
+    private var time = 0.0
     private var cameraSource: CameraSource? = null
+    private val gameViewModel: GameViewModel by viewModels()
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -70,8 +78,8 @@ class CameraActivity : AppCompatActivity() {
 
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         surfaceView = binding.surfaceView
-//        tvCounter = binding.tvCounter
 
         type = intent.getStringExtra(EXTRA_CLASSIFICATION).toString()
 
@@ -87,7 +95,28 @@ class CameraActivity : AppCompatActivity() {
         numFrameRequirement= 5
         downDone = false
         counter = 0
-//        currentFps = 20
+
+        serviceIntent = Intent(applicationContext, TimeService::class.java)
+        registerReceiver(updateTime, IntentFilter(TimeService.TIMER_UPDATED))
+        startStopTimer()
+        binding.btnEnd.setOnClickListener {
+             lifecycleScope.launch {
+                gameViewModel.getUserToken().collect { token ->
+                    gameViewModel.postSubmitScore(token, counter).collect { result ->
+                        result.onSuccess {
+                           onBackPressed()
+                        }
+                    }
+                }
+            }
+        }
+        binding.ivSetting.setOnClickListener {
+            val mSettingDialogFragment = DialogSetting()
+
+            val mFragmentManager = supportFragmentManager
+            mSettingDialogFragment.show(mFragmentManager, DialogSetting::class.java.simpleName)
+        }
+
 
     }
 
@@ -108,6 +137,11 @@ class CameraActivity : AppCompatActivity() {
         cameraSource = null
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        stopTimer()
+    }
+
 
     private fun cameraClassification() {
         if (allPermissionsGranted()) {
@@ -122,14 +156,12 @@ class CameraActivity : AppCompatActivity() {
                             poseIsCorrect: Boolean,
                             pose: Pose
                         ) {
-
-
                             when(type){
                                 "sit" -> {
                                     this@CameraActivity.runOnUiThread {
                                         binding.tvCounter.text = getString(R.string.sit_up, counter.toString())
                                     }
-//                            binding.tvCounter.text = "Test
+
                                     if (poseIsCorrect && bodyIsVisible(pose)){
                                         var shoulderY = 0
                                         shoulderY = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x < pose.keyPoints[BodyPart.RIGHT_ANKLE.position].coordinate.x){
@@ -251,6 +283,47 @@ class CameraActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
+
+
+    private fun startStopTimer()
+    {
+        if(timerStarted)
+            stopTimer()
+        else
+            startTimer()
+    }
+
+    private fun startTimer()
+    {
+        serviceIntent.putExtra(TimeService.TIME_EXTRA, time)
+        startService(serviceIntent)
+        timerStarted = true
+    }
+
+    private fun stopTimer()
+    {
+        stopService(serviceIntent)
+        timerStarted = false
+    }
+    private val updateTime: BroadcastReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(context: Context, intent: Intent)
+        {
+            time = intent.getDoubleExtra(TimeService.TIME_EXTRA, 0.0)
+            binding.tvTimer.text = getTimeStringFromDouble(time)
+        }
+    }
+
+    private fun getTimeStringFromDouble(time: Double): String
+    {
+        val resultInt = time.roundToInt()
+        val minutes = resultInt % 86400 % 3600 / 60
+        val seconds = resultInt % 86400 % 3600 % 60
+
+        return makeTimeString(minutes, seconds)
+    }
+
+    private fun makeTimeString( min: Int, sec: Int): String = String.format("%02d:%02d", min, sec)
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)

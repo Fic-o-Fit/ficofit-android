@@ -42,6 +42,7 @@
             android:exported="false"/>
 
         <service android:name=".service.RefreshTokenService" />
+        <service android:name=".service.TimeService" />
 
         <meta-data
             android:name="preloaded_fonts"
