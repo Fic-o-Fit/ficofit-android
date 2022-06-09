@@ -20,13 +20,13 @@ class CalisthenicsClassifier(assetManager: AssetManager, calisthenicType: String
         MODEL_TYPE = calisthenicType
         var modelPath = when (MODEL_TYPE) {
             "push" -> {
-                "pushup-model-31may22.tflite"
+                "pushup-model.tflite"
             }
             "sit" -> {
-                "situp-model-31may22.tflite"
+                "situp-model.tflite"
             }
             else -> {
-                "pushup-model-31may22.tflite"
+                "pushup-model.tflite"
             }
         }
         INTERPRETER = Interpreter(loadModelFile(assetManager, modelPath), tfliteOptions)
