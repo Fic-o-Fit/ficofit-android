@@ -13,15 +13,11 @@ import android.util.Log
 import android.view.SurfaceView
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.data.classifier.CalisthenicsClassifier
@@ -34,11 +30,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class CameraActivity : AppCompatActivity() {
+class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var type: String
@@ -344,5 +339,18 @@ class CameraActivity : AppCompatActivity() {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
         const val EXTRA_CLASSIFICATION = "extra_classification"
+    }
+
+    override fun onDialogSwitchClick(dialog: DialogFragment) {
+
+        dialog.dismiss()
+    }
+
+    override fun onDialogModeClick(dialog: DialogFragment) {
+        dialog.dismiss()
+    }
+
+    override fun onDialogNegativeClick(dialog: DialogFragment) {
+        dialog.dismiss()
     }
 }
