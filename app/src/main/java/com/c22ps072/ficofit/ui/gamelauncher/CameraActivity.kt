@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.SurfaceView
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -29,16 +30,19 @@ import com.c22ps072.ficofit.data.source.model.BodyPart
 import com.c22ps072.ficofit.data.source.model.Pose
 import com.c22ps072.ficofit.databinding.ActivityCameraBinding
 import com.c22ps072.ficofit.service.TimeService
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var type: String
+    var points: Int = 0
     var history = mutableListOf<Int>()
     var numFrameRequirement: Int = 5
     var downDone: Boolean = false
@@ -92,7 +96,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         history = mutableListOf<Int>()
-        numFrameRequirement= 5
+        numFrameRequirement = 5
         downDone = false
         counter = 0
 
@@ -100,11 +104,22 @@ class CameraActivity : AppCompatActivity() {
         registerReceiver(updateTime, IntentFilter(TimeService.TIMER_UPDATED))
         startStopTimer()
         binding.btnEnd.setOnClickListener {
-             lifecycleScope.launch {
+            points = ((counter / time) * 100).roundToInt()
+            lifecycleScope.launch {
                 gameViewModel.getUserToken().collect { token ->
-                    gameViewModel.postSubmitScore(token, counter).collect { result ->
-                        result.onSuccess {
-                           onBackPressed()
+                    Log.e("Camera", "Timer : $time, Counter: $counter")
+                    gameViewModel.getMyScore(token).collect { resultMyScore ->
+                        resultMyScore.onSuccess { recentScore ->
+                            val score: Int = recentScore.score + points
+                            gameViewModel.postSubmitScore(token, score).collect { result ->
+                                result.onSuccess {
+                                    Log.e("Camera", it.status)
+                                    finish()
+                                }
+                                result.onFailure {
+                                    Log.e("Camera", it.message.toString())
+                                }
+                            }
                         }
                     }
                 }

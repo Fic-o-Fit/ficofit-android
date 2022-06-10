@@ -9,25 +9,26 @@ import androidx.fragment.app.DialogFragment
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentDialogSettingBinding
 
-    class DialogSetting : DialogFragment() {
-        private lateinit var listener: DialogSettingListener
-        private lateinit var _binding: FragmentDialogSettingBinding
-        private val binding get() = _binding as FragmentDialogSettingBinding
-        interface DialogSettingListener {
-            fun onDialogSwitchClick(dialog: DialogFragment)
-            fun onDialogModeClick(dialog: DialogFragment)
-            fun onDialogNegativeClick(dialog: DialogFragment)
-        }
+class DialogSetting : DialogFragment() {
+    private lateinit var listener: DialogSettingListener
+    private lateinit var _binding: FragmentDialogSettingBinding
+    private val binding get() = _binding
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            binding.btnMode.setOnClickListener {
-                listener.onDialogModeClick(this)
-            }
-            binding.btnSwitchCamera.setOnClickListener {
-                listener.onDialogSwitchClick(this)
-            }
+    interface DialogSettingListener {
+        fun onDialogSwitchClick(dialog: DialogFragment)
+        fun onDialogModeClick(dialog: DialogFragment)
+        fun onDialogNegativeClick(dialog: DialogFragment)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnMode.setOnClickListener {
+            listener.onDialogModeClick(this)
         }
+        binding.btnSwitchCamera.setOnClickListener {
+            listener.onDialogSwitchClick(this)
+        }
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
