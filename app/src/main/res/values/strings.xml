@@ -38,4 +38,6 @@
     <string name="calories_burn">Calories Burn</string>
     <string name="games_has_been_play">Games Has Been Play</string>
     <string name="your_current_position">Your Current Position</string>
+    <string name="_100kkal">10Kkal</string>
+    <string name="activities">Activities</string>
 </resources>

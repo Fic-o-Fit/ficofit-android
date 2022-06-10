@@ -26,6 +26,7 @@ import com.c22ps072.ficofit.data.source.model.BodyPart
 import com.c22ps072.ficofit.data.source.model.Pose
 import com.c22ps072.ficofit.databinding.ActivityCameraBinding
 import com.c22ps072.ficofit.service.TimeService
+import com.c22ps072.ficofit.utils.UnderDevelopmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,6 +50,8 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener 
     private var time = 0.0
     private var cameraSource: CameraSource? = null
     private val gameViewModel: GameViewModel by viewModels()
+
+    private val mFragmentManager = supportFragmentManager
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -122,8 +125,6 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener 
         }
         binding.ivSetting.setOnClickListener {
             val mSettingDialogFragment = DialogSetting()
-
-            val mFragmentManager = supportFragmentManager
             mSettingDialogFragment.show(mFragmentManager, DialogSetting::class.java.simpleName)
         }
 
@@ -347,7 +348,8 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener 
     }
 
     override fun onDialogModeClick(dialog: DialogFragment) {
-        dialog.dismiss()
+        val mDialogUnderDevelopment = UnderDevelopmentDialog()
+        mDialogUnderDevelopment.show(mFragmentManager, UnderDevelopmentDialog::class.java.simpleName)
     }
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {
