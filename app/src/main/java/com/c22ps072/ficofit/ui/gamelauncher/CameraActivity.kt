@@ -34,7 +34,7 @@ import java.util.concurrent.ExecutorService
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener {
+class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener, GameReportDialog.ReportDialogListener {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var type: String
@@ -112,7 +112,9 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener 
                             gameViewModel.postSubmitScore(token, score).collect { result ->
                                 result.onSuccess {
                                     Log.e("Camera", it.status)
-                                    finish()
+
+                                    // show report dialog
+                                    showGameReportDialog()
                                 }
                                 result.onFailure {
                                     Log.e("Camera", it.message.toString())
@@ -129,6 +131,17 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener 
         }
 
 
+    }
+
+    private fun showGameReportDialog() {
+        startStopTimer()
+
+        val dialogReport = GameReportDialog()
+        val args = Bundle()
+
+        args.putString(GameReportDialog.TEXT_POINT, points.toString())
+        dialogReport.arguments = args
+        dialogReport.show(mFragmentManager, GameReportDialog::class.java.simpleName)
     }
 
     override fun onStart() {
@@ -354,5 +367,10 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener 
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {
         dialog.dismiss()
+    }
+
+    override fun onButtonCloseListener(dialog: GameReportDialog) {
+        dialog.dismiss()
+        finish()
     }
 }
