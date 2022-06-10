@@ -4,20 +4,44 @@ import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
+import com.c22ps072.ficofit.data.AuthRepository
 import com.c22ps072.ficofit.ui.home.HomeActivity.Companion.START_SERVICE
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RefreshTokenService : LifecycleService() {
+
+    @Inject
+    lateinit var authRepository: AuthRepository
+
+    private var serviceJob: Job = Job()
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             if (it.action == START_SERVICE) {
                 Log.e("Service", "Service launched")
                 lifecycleScope.launchWhenCreated {
-                    launch {
-                        while(true) {
-                            delay(5000)
-                            Log.e("Service", "loop service")
+                    serviceJob = launch {
+                        authRepository.getUserEmail().collect { email ->
+                            authRepository.getUserPassword().collect { password ->
+                                while(true) {
+                                    delay(10000)
+                                    Log.e("Service", "loop service")
+                                    Log.e("Service", "email : $email, password: $password")
+                                    authRepository.postUserLogin(email, password).collect { result ->
+                                        result.onSuccess { response ->
+                                            response.token.let { token ->
+                                                authRepository.saveUserToken(token)
+                                            }
+                                        }
+                                    }
+                                    delay(300000)
+                                }
+                            }
                         }
                     }
                 }

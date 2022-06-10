@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.data.source.remote.response.UserPoint
 import com.c22ps072.ficofit.databinding.FragmentLeaderBoardBinding
 import com.c22ps072.ficofit.utils.Helpers.isVisible
@@ -29,6 +30,9 @@ class LeaderBoardFragment : Fragment() {
     private val viewModel: LeaderBoardViewModel by viewModels()
     private var leaderBoardJob: Job = Job()
 
+    private lateinit var bottomNav: View
+    private lateinit var fabGame: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +44,13 @@ class LeaderBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bottomNav = requireActivity().findViewById<View>(R.id.bottomAppBar)
+        fabGame = requireActivity().findViewById<View>(R.id.btn_game)
+        View.GONE.let {
+            bottomNav.visibility = it
+            fabGame.visibility = it
+        }
 
         binding.ivBack.setOnClickListener {
             findNavController().navigate(LeaderBoardFragmentDirections.actionLeaderBoardFragmentToNavigationDashboard())
@@ -85,6 +96,10 @@ class LeaderBoardFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        View.VISIBLE.let {
+            bottomNav.visibility = it
+            fabGame.visibility = it
+        }
         _binding = null
     }
 }

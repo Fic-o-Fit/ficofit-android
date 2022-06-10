@@ -13,6 +13,7 @@ class PreferenceDataStore @Inject constructor(private val dataStore: DataStore<P
     private val USER_REFRESH_TOKEN = stringPreferencesKey("user_refresh_token")
     private val USER_NAME_KEY = stringPreferencesKey("user_name")
     private val USER_EMAIL_KEY = stringPreferencesKey("user_email")
+    private val USER_PASSWORD_KEY = stringPreferencesKey("user_password_key")
 
     fun getUserToken(): Flow<String> = dataStore.data.map { it[USER_TOKEN_KEY] ?: "" }
 
@@ -45,6 +46,14 @@ class PreferenceDataStore @Inject constructor(private val dataStore: DataStore<P
     suspend fun saveUserEmail(email: String) {
         dataStore.edit { preferences ->
             preferences[USER_EMAIL_KEY] = email
+        }
+    }
+
+    fun getUserPassword(): Flow<String> = dataStore.data.map { it[USER_PASSWORD_KEY] ?: "" }
+
+    suspend fun saveUserPassword(password: String) {
+        dataStore.edit { preferences ->
+            preferences[USER_PASSWORD_KEY] = password
         }
     }
 

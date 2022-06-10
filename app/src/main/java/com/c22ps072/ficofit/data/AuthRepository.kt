@@ -28,6 +28,10 @@ class AuthRepository @Inject constructor (
 
     override suspend fun saveUserEmail(email: String) = dataStore.saveUserEmail(email)
 
+    override fun getUserPassword(): Flow<String> = dataStore.getUserPassword()
+
+    override suspend fun saveUserPassword(password: String) = dataStore.saveUserPassword(password)
+
     override suspend fun logout() = dataStore.clearCache()
 
     override suspend fun postUserLogin(email: String, password: String): Flow<Result<SignInResponse>> = flow {

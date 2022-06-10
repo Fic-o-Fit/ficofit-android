@@ -182,6 +182,7 @@ class DialogProfileFragment : Fragment() {
                                 viewModel.saveUserRefreshToken(refreshToken)
                             }.also {
                                 viewModel.saveEmailUser(args.email)
+                                viewModel.saveUserPassword(args.password)
                                 Intent(requireContext(), HomeActivity::class.java).also { intent ->
                                     intent.putExtra(HomeActivity.EXTRA_TOKEN,token)
                                     startActivity(intent)
