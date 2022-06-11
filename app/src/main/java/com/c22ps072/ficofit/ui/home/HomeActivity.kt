@@ -13,7 +13,6 @@ import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.ActivityHomeBinding
 import com.c22ps072.ficofit.service.RefreshTokenService
 import com.c22ps072.ficofit.ui.authentication.AuthenticationActivity
-import com.c22ps072.ficofit.ui.authentication.AuthenticationViewModel
 import com.c22ps072.ficofit.ui.home.bottomsheetdialog.BottomSheet
 import com.c22ps072.ficofit.ui.home.setting.LogoutDialog
 import com.c22ps072.ficofit.ui.home.setting.SettingsViewModel
@@ -32,9 +31,7 @@ class HomeActivity : AppCompatActivity(), LogoutDialog.LogoutDialogListener {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intentService = Intent(this, RefreshTokenService::class.java)
-        intentService.action = START_SERVICE
-        startService(intentService)
+        startRefreshTokenService()
 
         val navView: BottomNavigationView = binding.bottomNavigationView
 
@@ -47,6 +44,17 @@ class HomeActivity : AppCompatActivity(), LogoutDialog.LogoutDialogListener {
                 add(BottomSheet(), BottomSheet::class.java.simpleName)
             }
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        startRefreshTokenService()
+    }
+
+    private fun startRefreshTokenService() {
+        val intentService = Intent(this, RefreshTokenService::class.java)
+        intentService.action = START_SERVICE
+        startService(intentService)
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment) {

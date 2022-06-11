@@ -38,7 +38,7 @@ class RefreshTokenService : LifecycleService() {
                                             }
                                         }
                                     }
-                                    delay(300000)
+                                    delay(180000)
                                 }
                             }
                         }

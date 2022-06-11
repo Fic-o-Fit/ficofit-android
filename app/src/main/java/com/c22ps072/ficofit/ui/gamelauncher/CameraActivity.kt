@@ -355,16 +355,17 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
         const val EXTRA_CLASSIFICATION = "extra_classification"
     }
 
+    private fun showUnderDevelopmentDialog() {
+        val mDialogUnderDevelopment = UnderDevelopmentDialog()
+        mDialogUnderDevelopment.show(mFragmentManager, UnderDevelopmentDialog::class.java.simpleName)
+    }
+
     override fun onDialogSwitchClick(dialog: DialogFragment) {
-        lifecycleScope.launch {
-            cameraSource?.switchCamera()
-        }
-        dialog.dismiss()
+        showUnderDevelopmentDialog()
     }
 
     override fun onDialogModeClick(dialog: DialogFragment) {
-        val mDialogUnderDevelopment = UnderDevelopmentDialog()
-        mDialogUnderDevelopment.show(mFragmentManager, UnderDevelopmentDialog::class.java.simpleName)
+        showUnderDevelopmentDialog()
     }
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {
