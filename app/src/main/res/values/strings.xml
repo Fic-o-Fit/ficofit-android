@@ -40,4 +40,8 @@
     <string name="your_current_position">Your Current Position</string>
     <string name="_100kkal">10Kkal</string>
     <string name="activities">Activities</string>
+    <string name="sit_ups">Sit Ups</string>
+    <string name="earn_points">Earn Points</string>
+    <string name="push_ups">Push Ups</string>
+    <string name="tv_endless_run">Endless Running Game</string>
 </resources>

@@ -26,20 +26,20 @@ class BottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.icSitUp.setOnClickListener {
+        binding.btnSitUps.setOnClickListener {
             launchCamera("sit")
         }
-        binding.icPushUp.setOnClickListener {
+        binding.btnPushUps.setOnClickListener {
             launchCamera("push")
         }
-        binding.icTempleRun.setOnClickListener {
+        binding.btnEndlessGame.setOnClickListener {
 //            launchCamera()
         }
     }
 
     private fun launchCamera(calisthenics: String) {
         val intent = Intent(activity, CameraActivity::class.java)
-            intent.putExtra(EXTRA_CLASSIFICATION,calisthenics)
+            intent.putExtra(EXTRA_CLASSIFICATION, calisthenics)
             startActivity(intent)
             dismiss()
     }
