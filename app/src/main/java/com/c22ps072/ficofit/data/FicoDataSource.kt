@@ -18,4 +18,8 @@ interface FicoDataSource {
 
     fun getUserToken() : Flow<String>
 
+    fun getUserCaloriesBurn() : Flow<Int>
+
+    suspend fun saveUserCaloriesBur(calories: Int)
+
 }

@@ -175,19 +175,27 @@ class DialogProfileFragment : Fragment() {
                         credentials.apply {
                             Log.d("SIGN UP", "token : $token")
                             Log.d("SIGN UP", "refreshToken : $refreshToken")
+                            viewModel.saveEmailUser(args.email)
+                            viewModel.saveUserPassword(args.password)
                             token.let { token->
                                 viewModel.saveUserToken(token)
                             }
                             refreshToken.let { refreshToken ->
                                 viewModel.saveUserRefreshToken(refreshToken)
                             }.also {
-                                viewModel.saveEmailUser(args.email)
-                                viewModel.saveUserPassword(args.password)
-                                Intent(requireContext(), HomeActivity::class.java).also { intent ->
-                                    intent.putExtra(HomeActivity.EXTRA_TOKEN,token)
-                                    startActivity(intent)
-                                    requireActivity().finish()
+                                viewModel.postSubmitWeight(token, weight.toInt()).collect { resultWeight ->
+                                    resultWeight.onSuccess {
+                                        Intent(requireContext(), HomeActivity::class.java).also { intent ->
+                                            intent.putExtra(HomeActivity.EXTRA_TOKEN,token)
+                                            startActivity(intent)
+                                            requireActivity().finish()
+                                        }
+                                    }
+                                    resultWeight.onFailure {
+                                        Log.e("SignUp", it.message.toString())
+                                    }
                                 }
+
                             }
                         }
                     }
@@ -205,6 +213,7 @@ class DialogProfileFragment : Fragment() {
                 }
             }
         }
+
     }
 
 

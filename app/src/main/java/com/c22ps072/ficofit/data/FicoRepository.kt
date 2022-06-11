@@ -59,4 +59,8 @@ class FicoRepository @Inject constructor(
     override suspend fun saveUserName(name: String) = dataStore.saveUserName(name)
 
     override  fun getUserToken(): Flow<String> = dataStore.getUserToken()
+
+    override fun getUserCaloriesBurn(): Flow<Int> = dataStore.getUserCaloriesBurn()
+
+    override suspend fun saveUserCaloriesBur(calories: Int) = dataStore.saveUserCaloriesBurn(calories)
 }

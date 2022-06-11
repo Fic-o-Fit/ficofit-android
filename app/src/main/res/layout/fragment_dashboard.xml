@@ -158,12 +158,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_calendar_month"
-                    app:tint="@color/primaryColor" />
+                    android:src="@drawable/ic_fire"
+                    app:tint="@color/accentColor" />
 
                 <TextView
-                    android:id="@+id/tv_started_habit"
-                    style="@style/Text.Card.Suffix"
+                    android:id="@+id/tv_calories_burn"
+                    android:textSize="26sp"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/_100kkal" />
@@ -190,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_check"
-                    app:tint="@color/accentColor" />
+                    app:tint="@color/primaryColor" />
 
                 <TextView
                     android:id="@+id/tv_total_completed"

@@ -14,4 +14,6 @@ class DashboardViewModel @Inject constructor(private val ficoRepository: FicoRep
     fun getUserName() = ficoRepository.getUserName()
 
     suspend fun saveUserName(name: String) = ficoRepository.saveUserName(name)
+
+    fun getUserCaloriesBurn() = ficoRepository.getUserCaloriesBurn()
 }

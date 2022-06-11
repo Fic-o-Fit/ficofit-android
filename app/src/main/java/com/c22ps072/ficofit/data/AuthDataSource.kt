@@ -1,5 +1,6 @@
 package com.c22ps072.ficofit.data
 
+import com.c22ps072.ficofit.data.source.remote.response.GlobalResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignInResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignUpResponse
 import kotlinx.coroutines.flow.Flow
@@ -36,4 +37,6 @@ interface AuthDataSource {
         weight: String,
         height: String
     ): Flow<Result<SignUpResponse>>
+
+    suspend fun postSubmitWeight(token: String, weight: Int) : Flow<Result<GlobalResponse>>
 }

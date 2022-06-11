@@ -33,6 +33,9 @@ class AuthenticationViewModel @Inject constructor(private val authRepository: Au
     suspend fun postUserSignIn(email: String, password: String) =
         authRepository.postUserLogin(email, password)
 
+    suspend fun postSubmitWeight(token: String, weight: Int) =
+        authRepository.postSubmitWeight(token, weight)
+
     /**
      * Interact with data store
      */
