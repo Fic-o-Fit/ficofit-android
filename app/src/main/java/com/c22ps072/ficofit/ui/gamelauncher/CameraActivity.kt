@@ -350,13 +350,15 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
     private fun makeTimeString( min: Int, sec: Int): String = String.format("%02d:%02d", min, sec)
 
     companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
+        val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        const val REQUEST_CODE_PERMISSIONS = 10
         const val EXTRA_CLASSIFICATION = "extra_classification"
     }
 
     override fun onDialogSwitchClick(dialog: DialogFragment) {
-
+        lifecycleScope.launch {
+            cameraSource?.switchCamera()
+        }
         dialog.dismiss()
     }
 

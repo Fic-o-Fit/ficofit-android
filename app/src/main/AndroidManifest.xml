@@ -40,6 +40,9 @@
         <activity
             android:name=".ui.onboarding.OnBoardingActivity"
             android:exported="false"/>
+        <activity
+            android:name=".ui.gamelauncher.EndlessRunnerActivity"
+            android:exported="false"/>
 
         <service android:name=".service.RefreshTokenService" />
         <service android:name=".service.TimeService" />

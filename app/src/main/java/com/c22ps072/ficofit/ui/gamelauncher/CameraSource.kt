@@ -32,13 +32,6 @@ class CameraSource(
     private val listener: CameraSourceListener? = null
 ) {
 
-    companion object {
-        private const val PREVIEW_WIDTH = 640
-        private const val PREVIEW_HEIGHT = 480
-        private const val MIN_CONFIDENCE = 0.5f
-        private const val TAG = "Camera Source"
-    }
-
     private val lock = Any()
     private var estimator: PoseEstimator? = null
     private var classifier: CalisthenicsClassifier? = null
@@ -89,7 +82,8 @@ class CameraSource(
                 }
                 yuvConverter.yuvToRgb(image, imageBitmap)
                 val rotateMatrix = Matrix()
-                rotateMatrix.postRotate(90.0f)
+                rotateMatrix.postScale(1f, -1f, PREVIEW_WIDTH / 2f, PREVIEW_HEIGHT / 2f)
+                rotateMatrix.postRotate(-90.0f)
 
                 val rotatedBitmap = Bitmap.createBitmap(
                     imageBitmap, 0, 0, PREVIEW_WIDTH, PREVIEW_HEIGHT,
@@ -148,10 +142,22 @@ class CameraSource(
             if (cameraDirection != null &&
                 cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
             ) {
+                this.cameraId = cameraId
+            }
+        }
+    }
+
+    suspend fun switchCamera() {
+        for (cameraId in cameraManager.cameraIdList) {
+            if (this.cameraId != cameraId) {
+                this.cameraId = cameraId
+            } else {
                 continue
             }
-            this.cameraId = cameraId
         }
+        this.camera?.close()
+        this.openCamera(cameraManager, this.cameraId)
+        Log.e("Camera", this.cameraId)
     }
 
     fun setEstimator(estimator: PoseEstimator) {
@@ -212,7 +218,7 @@ class CameraSource(
 
     private fun processImage(bitmap: Bitmap) {
         val poses = mutableListOf<Pose>()
-        var poseIsCorrect: Boolean = false
+        var poseIsCorrect = false
 
         synchronized(lock) {
             estimator?.estimatePose(bitmap)?.let {
@@ -291,5 +297,12 @@ class CameraSource(
         fun onFPSListener(fps: Int)
 
         fun onDetectedInfo(poseIsCorrect:Boolean, pose:Pose)
+    }
+
+    companion object {
+        private const val PREVIEW_WIDTH = 640
+        private const val PREVIEW_HEIGHT = 480
+        private const val MIN_CONFIDENCE = 0.5f
+        private const val TAG = "Camera Source"
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.c22ps072.ficofit.databinding.FragmentBottomSheetBinding
 import com.c22ps072.ficofit.ui.gamelauncher.CameraActivity
 import com.c22ps072.ficofit.ui.gamelauncher.CameraActivity.Companion.EXTRA_CLASSIFICATION
+import com.c22ps072.ficofit.ui.gamelauncher.EndlessRunnerActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheet : BottomSheetDialogFragment() {
@@ -33,7 +34,8 @@ class BottomSheet : BottomSheetDialogFragment() {
             launchCamera("push")
         }
         binding.btnEndlessGame.setOnClickListener {
-//            launchCamera()
+            startActivity(Intent(activity, EndlessRunnerActivity::class.java))
+            dismiss()
         }
     }
 

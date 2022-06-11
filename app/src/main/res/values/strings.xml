@@ -45,4 +45,7 @@
     <string name="push_ups">Push Ups</string>
     <string name="tv_endless_run">Endless Running Game</string>
     <string name="tag_line">Get fit, don\'t quit</string>
+    <string name="current_points">Current Points : %s</string>
+    <string name="high_score">High Score: %s</string>
+    <string name="total_points">Total Points: %s</string>
 </resources>
