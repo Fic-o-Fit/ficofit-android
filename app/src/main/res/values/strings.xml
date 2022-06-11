@@ -4,6 +4,12 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <string name="text_onboarding_1">Make Your Exercise Fun!</string>
+    <string name="text_onboarding_1_subtitle">Join us and enjoy your workout with our collection of minigames you can choose from!</string>
+    <string name="text_onboarding_2">Tackle new challenges</string>
+    <string name="text_onboarding_2_subtitle">Make your own target and collect rewards!</string>
+    <string name="text_onboarding_3">Backed by Next Generation AI</string>
+    <string name="text_onboarding_3_subtitle">We use Smart Movement Detection to bring an immersive experience of working out to you</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="sign_in">Sign In</string>
