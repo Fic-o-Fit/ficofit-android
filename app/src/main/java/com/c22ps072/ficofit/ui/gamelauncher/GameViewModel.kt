@@ -10,4 +10,7 @@ class GameViewModel @Inject constructor(private val ficoRepository: FicoReposito
     suspend fun postSubmitScore(token: String, score: Int) = ficoRepository.postSubmitScore(token, score)
     fun getUserToken() = ficoRepository.getUserToken()
     suspend fun getMyScore(token: String) = ficoRepository.getMyScore(token)
+    suspend fun postCaloriesCounter(token: String, reps: Int) = ficoRepository.postCaloriesCounter(token, reps)
+    fun getUserCalories() = ficoRepository.getUserCaloriesBurn()
+    suspend fun saveUserCalories(calories: Double) = ficoRepository.saveUserCaloriesBurn(calories)
  }

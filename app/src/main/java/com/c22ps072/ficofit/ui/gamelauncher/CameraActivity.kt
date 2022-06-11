@@ -26,6 +26,7 @@ import com.c22ps072.ficofit.data.source.model.BodyPart
 import com.c22ps072.ficofit.data.source.model.Pose
 import com.c22ps072.ficofit.databinding.ActivityCameraBinding
 import com.c22ps072.ficofit.service.TimeService
+import com.c22ps072.ficofit.utils.Helpers.isVisible
 import com.c22ps072.ficofit.utils.UnderDevelopmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -102,22 +103,34 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
         registerReceiver(updateTime, IntentFilter(TimeService.TIMER_UPDATED))
         startStopTimer()
         binding.btnEnd.setOnClickListener {
+            setLoading(true)
+            startStopTimer()
             points = ((counter / time) * 100).roundToInt()
-            lifecycleScope.launch {
-                gameViewModel.getUserToken().collect { token ->
-                    Log.e("Camera", "Timer : $time, Counter: $counter")
-                    gameViewModel.getMyScore(token).collect { resultMyScore ->
-                        resultMyScore.onSuccess { recentScore ->
-                            val score: Int = recentScore.score + points
-                            gameViewModel.postSubmitScore(token, score).collect { result ->
-                                result.onSuccess {
-                                    Log.e("Camera", it.status)
+            lifecycleScope.launchWhenCreated {
+                launch {
+                    gameViewModel.getUserToken().collect { token ->
+                        Log.e("Camera", "Timer : $time, Counter: $counter")
+                        gameViewModel.getMyScore(token).collect { resultMyScore ->
+                            resultMyScore.onSuccess { recentScore ->
+                                val score: Int = recentScore.score + points
+                                gameViewModel.postSubmitScore(token, score).collect { result ->
+                                    result.onSuccess {
+                                        Log.e("Camera", it.status)
 
-                                    // show report dialog
-                                    showGameReportDialog()
-                                }
-                                result.onFailure {
-                                    Log.e("Camera", it.message.toString())
+                                        gameViewModel.postCaloriesCounter(token, counter).collect { caloriesResult ->
+                                            caloriesResult.onSuccess { calories ->
+                                                // show report dialog
+                                                showGameReportDialog(calories.caloriesBurn)
+                                                setLoading(false)
+                                            }
+                                            caloriesResult.onFailure { calories ->
+                                                Log.e("Camera", calories.message.toString())
+                                            }
+                                        }
+                                    }
+                                    result.onFailure {
+                                        Log.e("Camera", it.message.toString())
+                                    }
                                 }
                             }
                         }
@@ -133,13 +146,12 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
 
     }
 
-    private fun showGameReportDialog() {
-        startStopTimer()
-
+    private fun showGameReportDialog(caloriesBurn: Double) {
         val dialogReport = GameReportDialog()
         val args = Bundle()
 
         args.putString(GameReportDialog.TEXT_POINT, points.toString())
+        args.putString(GameReportDialog.TEXT_CALORIES, caloriesBurn.toString())
         dialogReport.arguments = args
         dialogReport.show(mFragmentManager, GameReportDialog::class.java.simpleName)
     }
@@ -306,6 +318,18 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
             )
         }
         supportActionBar?.hide()
+    }
+
+    private fun setLoading(state: Boolean){
+        binding.apply {
+
+            if (state) {
+                viewLoading.isVisible(true)
+
+            }else {
+                viewLoading.isVisible(false)
+            }
+        }
     }
 
 

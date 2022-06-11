@@ -11,7 +11,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Great! You've got :"
+        android:text="@string/great_you_ve_got"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             android:id="@+id/imageView5"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:srcCompat="@drawable/ic_medal" />
+            android:src="@drawable/ic_medal" />
 
         <TextView
             android:id="@+id/tv_points_earned"
@@ -44,14 +44,28 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_calories_burn"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/s_calories_burn"
+        android:textSize="18sp"
+        android:drawablePadding="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:drawableStartCompat="@drawable/ic_fire"
+        app:drawableTint="@color/accentColor" />
+
     <Button
         android:id="@+id/btn_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@android:string/ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_calories_burn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

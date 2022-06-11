@@ -117,6 +117,12 @@ class DashboardFragment : Fragment() {
                 binding.tvName.text = it
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.getUserCaloriesBurn().collect {
+                binding.tvCaloriesBurn.text = it.toString()
+            }
+        }
     }
 
     class DayViewContainer(view: View) : ViewContainer(view) {

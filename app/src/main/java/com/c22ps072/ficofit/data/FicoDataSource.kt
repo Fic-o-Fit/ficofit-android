@@ -1,5 +1,6 @@
 package com.c22ps072.ficofit.data
 
+import com.c22ps072.ficofit.data.source.remote.response.CaloriesResponse
 import com.c22ps072.ficofit.data.source.remote.response.ScoreResponse
 import com.c22ps072.ficofit.data.source.remote.response.UserPoint
 import kotlinx.coroutines.flow.Flow
@@ -18,8 +19,10 @@ interface FicoDataSource {
 
     fun getUserToken() : Flow<String>
 
-    fun getUserCaloriesBurn() : Flow<Int>
+    fun getUserCaloriesBurn() : Flow<Double>
 
-    suspend fun saveUserCaloriesBur(calories: Int)
+    suspend fun saveUserCaloriesBurn(calories: Double)
+
+    suspend fun postCaloriesCounter(token: String, reps: Int) : Flow<Result<CaloriesResponse>>
 
 }
