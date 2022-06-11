@@ -21,16 +21,21 @@ import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.util.DisplayMetrics
+import android.util.Log
+import androidx.activity.viewModels
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.data.classifier.PoseEstimator
 import com.c22ps072.ficofit.data.source.model.BodyPart
 import com.c22ps072.ficofit.data.source.model.Pose
 import com.c22ps072.ficofit.databinding.ActivityEndlessrunnerBinding
 import com.c22ps072.ficofit.endlessrunner.EndlessRunner
+import dagger.hilt.android.AndroidEntryPoint
 
-class EndlessRunnerActivity : FragmentActivity(), AndroidFragmentApplication.Callbacks {
+@AndroidEntryPoint
+class EndlessRunnerActivity : FragmentActivity(), AndroidFragmentApplication.Callbacks, GameReportDialog.ReportDialogListener {
 
     private lateinit var binding: ActivityEndlessrunnerBinding
+    private val gameViewModel: GameViewModel by viewModels()
 
     lateinit var endlessRunnerFragment: GameFragment
 
@@ -115,6 +120,38 @@ class EndlessRunnerActivity : FragmentActivity(), AndroidFragmentApplication.Cal
         currentFps = 20
         lastJumpTime = null
         totalPoints = 0
+
+        binding.btnEnd.setOnClickListener {
+            lifecycleScope.launch {
+                gameViewModel.getUserToken().collect { token ->
+                    gameViewModel.getMyScore(token).collect { resultMyScore ->
+                        resultMyScore.onSuccess { recentScore ->
+                            val score: Int = recentScore.score + totalPoints
+                            gameViewModel.postSubmitScore(token, score).collect { result ->
+                                result.onSuccess {
+                                    Log.e("Camera", it.status)
+
+                                    // show report dialog
+                                    showGameReportDialog()
+                                }
+                                result.onFailure {
+                                    Log.e("Camera", it.message.toString())
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showGameReportDialog() {
+        val dialogReport = GameReportDialog()
+        val args = Bundle()
+
+        args.putString(GameReportDialog.TEXT_POINT, totalPoints.toString())
+        dialogReport.arguments = args
+        dialogReport.show(supportFragmentManager, GameReportDialog::class.java.simpleName)
     }
 
     // Create a Class that extends AndroidFragmentApplication which is the Fragment implementation for libGDX.
@@ -334,5 +371,10 @@ class EndlessRunnerActivity : FragmentActivity(), AndroidFragmentApplication.Cal
                 arguments = Bundle().apply { putString(ARG_MESSAGE, message) }
             }
         }
+    }
+
+    override fun onButtonCloseListener(dialog: GameReportDialog) {
+        dialog.dismiss()
+        finish()
     }
 }

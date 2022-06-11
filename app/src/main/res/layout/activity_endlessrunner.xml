@@ -28,6 +28,7 @@
 
     <TextView
         android:id="@+id/tvCurrentPoints"
+        android:textColor="@color/baseColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
@@ -39,6 +40,7 @@
 
     <TextView
         android:id="@+id/tvHighScore"
+        android:textColor="@color/baseColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -50,6 +52,7 @@
 
     <TextView
         android:id="@+id/tvTotalPoints"
+        android:textColor="@color/baseColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -58,5 +61,15 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_end"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        android:background="@color/accentColor"
+        app:layout_constraintBottom_toTopOf="@+id/gameContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
