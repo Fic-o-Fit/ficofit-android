@@ -5,14 +5,18 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.c22ps072.ficofit.R
+import com.c22ps072.ficofit.data.source.local.PreferenceDataStore.Companion.USER_CALORIES_BURN
 import com.c22ps072.ficofit.databinding.FragmentDialogGameReportBinding
+import com.c22ps072.ficofit.di.dataStore
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import java.text.DecimalFormat
 
 @AndroidEntryPoint
@@ -24,7 +28,7 @@ class GameReportDialog : DialogFragment() {
     private val gameViewModel: GameViewModel by viewModels()
 
     interface ReportDialogListener {
-        fun onButtonCloseListener(dialog: GameReportDialog)
+        fun onButtonCloseListener(dialog: GameReportDialog, calories: Double)
     }
 
     override fun onAttach(context: Context) {
@@ -49,6 +53,7 @@ class GameReportDialog : DialogFragment() {
             val args: Bundle? = arguments
             val points = args?.getString(TEXT_POINT)
             val calories = args?.getString(TEXT_CALORIES)
+            var totalCalories = 0.0
 
             binding.tvPointsEarned.text = "+${points}pts"
 
@@ -56,20 +61,17 @@ class GameReportDialog : DialogFragment() {
                 binding.tvCaloriesBurn.text =
                     getString(R.string.s_calories_burn, calories.toString())
 
-                lifecycleScope.launchWhenCreated {
-                    launch {
-                        gameViewModel.saveUserCalories(
-                            DecimalFormat("#0.00").format(calories.toDouble()).toDouble()
-                        )
-                    }
+                val currentCalories = runBlocking {
+                    requireContext().dataStore.data.first()[USER_CALORIES_BURN]
                 }
+                totalCalories = (currentCalories ?: 0.0) + calories.toDouble()
 
             } else {
                 binding.tvCaloriesBurn.visibility = View.GONE
             }
 
             binding.btnOk.setOnClickListener {
-                listener.onButtonCloseListener(this)
+                listener.onButtonCloseListener(this, totalCalories)
             }
 
             builder.create()

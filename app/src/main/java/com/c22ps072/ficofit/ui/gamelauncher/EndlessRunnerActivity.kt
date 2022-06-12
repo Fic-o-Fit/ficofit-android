@@ -373,7 +373,7 @@ class EndlessRunnerActivity : FragmentActivity(), AndroidFragmentApplication.Cal
         }
     }
 
-    override fun onButtonCloseListener(dialog: GameReportDialog) {
+    override fun onButtonCloseListener(dialog: GameReportDialog, calories: Double) {
         dialog.dismiss()
         finish()
     }

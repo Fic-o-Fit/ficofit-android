@@ -31,6 +31,7 @@ import com.c22ps072.ficofit.utils.UnderDevelopmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 import java.util.concurrent.ExecutorService
 import kotlin.math.roundToInt
 
@@ -396,7 +397,14 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
         dialog.dismiss()
     }
 
-    override fun onButtonCloseListener(dialog: GameReportDialog) {
+    override fun onButtonCloseListener(dialog: GameReportDialog, calories: Double) {
+        if (calories > 0) {
+            lifecycleScope.launch {
+                gameViewModel.saveUserCalories(
+                    DecimalFormat("#0.00").format(calories).toDouble()
+                )
+            }
+        }
         dialog.dismiss()
         finish()
     }
