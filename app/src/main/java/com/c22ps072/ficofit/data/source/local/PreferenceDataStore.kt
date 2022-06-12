@@ -29,7 +29,7 @@ class PreferenceDataStore @Inject constructor(private val dataStore: DataStore<P
         }
     }
 
-    fun getUserName(): Flow<String> = dataStore.data.map { it[USER_NAME_KEY] ?: "" }
+    fun getUserName(): Flow<String> = dataStore.data.map { it[USER_NAME_KEY] ?: "not_set_yet" }
 
 
 
