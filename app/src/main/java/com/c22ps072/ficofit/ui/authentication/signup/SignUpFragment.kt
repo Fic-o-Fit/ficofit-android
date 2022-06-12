@@ -18,7 +18,6 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,8 +26,32 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSignUp.setOnClickListener {
-            // for the next, store name email etc to bundle and send to dialog/on boarding profile page
-            findNavController().navigate(R.id.action_signUpFragment_to_dialogProfileFragment)
+            val name = binding.etFullName.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+
+            var emptyField = false
+
+            if (name.isEmpty()) {
+                binding.etFullName.error = "Name is required"
+                binding.etFullName.requestFocus()
+                emptyField = true
+            }
+            if (email.isEmpty()) {
+                binding.etEmail.error = "Email is required"
+                binding.etEmail.requestFocus()
+                emptyField = true
+            }
+            if (password.isEmpty()) {
+                binding.etPassword.error = "Password is required"
+                binding.etPassword.requestFocus()
+                emptyField = true
+            }
+
+            if (!emptyField) {
+                val action = SignUpFragmentDirections.actionSignUpFragmentToDialogProfileFragment(name, email, password)
+                findNavController().navigate(action)
+            }
         }
 
         binding.tvSignIn.setOnClickListener {

@@ -12,6 +12,7 @@
         android:id="@+id/illustration_on_boarding_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,16 +23,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/lorem"
+        android:text="@string/text_onboarding_1"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_one"
         app:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_one" />
 
+    <TextView
+        android:id="@+id/tv_on_boarding_one_subtitle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/text_onboarding_1_subtitle"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@id/tv_on_boarding_one"
+        app:layout_constraintStart_toStartOf="@id/tv_on_boarding_one"
+        app:layout_constraintTop_toBottomOf="@id/tv_on_boarding_one" />
+
     <ImageView
         android:id="@+id/illustration_on_boarding_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,16 +55,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/lorem"
+        android:text="@string/text_onboarding_2"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_two"
         app:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_two" />
 
+    <TextView
+        android:id="@+id/tv_on_boarding_two_subtitle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/text_onboarding_2_subtitle"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@id/tv_on_boarding_two"
+        app:layout_constraintStart_toStartOf="@id/tv_on_boarding_two"
+        app:layout_constraintTop_toBottomOf="@id/tv_on_boarding_two" />
+
     <ImageView
         android:id="@+id/illustration_on_boarding_three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -62,11 +87,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/lorem"
+        android:text="@string/text_onboarding_3"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/illustration_on_boarding_three"
         app:layout_constraintTop_toBottomOf="@+id/illustration_on_boarding_three" />
+
+    <TextView
+        android:id="@+id/tv_on_boarding_three_subtitle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/text_onboarding_3_subtitle"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@id/tv_on_boarding_three"
+        app:layout_constraintStart_toStartOf="@id/tv_on_boarding_three"
+        app:layout_constraintTop_toBottomOf="@id/tv_on_boarding_three" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_next"

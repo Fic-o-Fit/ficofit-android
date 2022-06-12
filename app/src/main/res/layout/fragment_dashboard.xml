@@ -41,29 +41,20 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:text="Good Morning"
+                        android:text="@string/good_morning"
                         android:textAllCaps="true"
                         tools:ignore="RelativeOverlap" />
 
                     <TextView
-                        android:id="@+id/toolbar_title_primary"
+                        android:id="@+id/tv_name"
                         style="@style/TextStyle.ToolbarTitlePrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/toolbar_title_secondary"
                         android:layout_alignParentStart="true"
-                        android:text="Your Name"
-                        android:textColor="@color/secondaryColor" />
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/btn_show_information"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_centerVertical="true"-->
-<!--                        android:layout_marginEnd="16dp"-->
-<!--                        android:background="@null"-->
-<!--                        android:src="@drawable/ic_outline_info_24" />-->
+                        android:textStyle="bold"
+                        tools:text="Your Name"
+                        android:textColor="@color/primaryColor" />
 
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
@@ -95,28 +86,49 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="1st"
-                    app:layout_constraintBottom_toTopOf="@+id/textView5"
+                    tools:text="1st"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_subtitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/tv_subtitle"
                     style="@style/Text.Streak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Your Current Position"
+                    android:text="@string/your_current_position"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
+                    android:id="@+id/iv_trophy"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_trophy_gold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:id="@+id/view_loading"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:alpha="0"
+                    android:background="@color/transparant"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/spin_kit"
+                        style="@style/SpinKitView.Large.Wave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:SpinKit_Color="@color/primaryColor" />
+                </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -146,21 +158,22 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_calendar_month"
-                    app:tint="#4A00E0" />
+                    android:src="@drawable/ic_fire"
+                    app:tint="@color/accentColor" />
 
                 <TextView
-                    android:id="@+id/tv_started_habit"
-                    style="@style/Text.Card.Number"
+                    android:id="@+id/tv_calories_burn"
+                    android:textSize="26sp"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="100Kkal" />
+                    android:text="@string/_100kkal" />
 
                 <TextView
                     style="@style/Text.Card.Description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calories Burn" />
+                    android:text="@string/calories_burn" />
 
             </LinearLayout>
 
@@ -178,20 +191,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_check"
-                    app:tint="#FF3C07" />
+                    app:tint="@color/primaryColor" />
 
                 <TextView
                     android:id="@+id/tv_total_completed"
-                    style="@style/Text.Card.Number"
+                    style="@style/Text.Card.Suffix"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="10 Times" />
+                    android:text="10x" />
 
                 <TextView
                     style="@style/Text.Card.Description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Games Has Been Play" />
+                    android:text="@string/games_has_been_play" />
 
             </LinearLayout>
 
@@ -240,62 +253,39 @@
                 app:cv_outDateStyle="endOfRow"
                 app:cv_scrollMode="paged" />
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:baselineAligned="false"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:weightSum="2">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:gravity="center"-->
-<!--                    tools:ignore="UseCompoundDrawables">-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    tools:ignore="UseCompoundDrawables">
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="12dp"-->
-<!--                        android:layout_height="12dp"-->
-<!--                        android:layout_marginEnd="8dp"-->
-<!--                        android:contentDescription="@string/all_complete"-->
-<!--                        android:src="@drawable/selected_date_background" />-->
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/activities"
+                        android:src="@drawable/selected_date_background"/>
 
-<!--                    <TextView-->
-<!--                        style="@style/Text"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/all_complete"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textSize="12sp" />-->
+                    <TextView
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activities"
+                        android:textAlignment="center"
+                        android:textSize="12sp" />
 
-<!--                </LinearLayout>-->
+                </LinearLayout>
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:gravity="center"-->
-<!--                    tools:ignore="UseCompoundDrawables">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="12dp"-->
-<!--                        android:layout_height="12dp"-->
-<!--                        android:layout_marginEnd="8dp"-->
-<!--                        android:contentDescription="@string/some_complete"-->
-<!--                        android:src="@drawable/selected_date_border" />-->
-
-<!--                    <TextView-->
-<!--                        style="@style/Text"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/some_complete"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textSize="12sp" />-->
-
-<!--                </LinearLayout>-->
-<!--            </LinearLayout>-->
+            </LinearLayout>
 
         </LinearLayout>
 

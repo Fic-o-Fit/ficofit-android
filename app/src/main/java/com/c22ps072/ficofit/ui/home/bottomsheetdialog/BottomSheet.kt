@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.c22ps072.ficofit.databinding.FragmentBottomSheetBinding
 import com.c22ps072.ficofit.ui.gamelauncher.CameraActivity
+import com.c22ps072.ficofit.ui.gamelauncher.CameraActivity.Companion.EXTRA_CLASSIFICATION
+import com.c22ps072.ficofit.ui.gamelauncher.EndlessRunnerActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheet : BottomSheetDialogFragment() {
@@ -25,21 +27,23 @@ class BottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.icSitUp.setOnClickListener {
-            launchCamera()
+        binding.btnSitUps.setOnClickListener {
+            launchCamera("sit")
         }
-        binding.icPushUp.setOnClickListener {
-            launchCamera()
+        binding.btnPushUps.setOnClickListener {
+            launchCamera("push")
         }
-        binding.icTempleRun.setOnClickListener {
-            launchCamera()
+        binding.btnEndlessGame.setOnClickListener {
+            startActivity(Intent(activity, EndlessRunnerActivity::class.java))
+            dismiss()
         }
     }
 
-    private fun launchCamera() {
+    private fun launchCamera(calisthenics: String) {
         val intent = Intent(activity, CameraActivity::class.java)
-        startActivity(intent)
-        dismiss()
+            intent.putExtra(EXTRA_CLASSIFICATION, calisthenics)
+            startActivity(intent)
+            dismiss()
     }
 
     override fun onDestroyView() {

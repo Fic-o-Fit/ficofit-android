@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="140dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="64dp"
@@ -39,6 +39,13 @@
             android:layout_height="18dp"
             motion:layout_constraintTop_toTopOf="@+id/menu1"
             motion:layout_constraintStart_toStartOf="@+id/menu1" />
+        <Constraint
+            android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toEndOf="@+id/tv_on_boarding_one"
+            android:layout_width="wrap_content"
+            android:id="@+id/textView5"
+            motion:layout_constraintTop_toBottomOf="@+id/tv_on_boarding_one"
+            motion:layout_constraintStart_toStartOf="@+id/tv_on_boarding_one" />
     </ConstraintSet>
     <ConstraintSet
         android:id="@+id/menu_two"
@@ -49,7 +56,8 @@
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="100dp"
-            motion:layout_constraintEnd_toStartOf="parent" />
+            motion:layout_constraintEnd_toStartOf="parent"
+            android:layout_marginEnd="42dp" />
         <Constraint
             android:id="@+id/menu_active"
             android:layout_width="18dp"
@@ -61,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="140dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="64dp"
@@ -90,7 +98,8 @@
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="100dp"
-            motion:layout_constraintEnd_toStartOf="parent" />
+            motion:layout_constraintEnd_toStartOf="parent"
+            android:layout_marginEnd="42dp" />
         <Constraint
             android:id="@+id/menu_active"
             android:layout_width="18dp"
@@ -102,7 +111,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="140dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="48dp"

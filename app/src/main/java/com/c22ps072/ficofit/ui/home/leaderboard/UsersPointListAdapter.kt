@@ -1,11 +1,12 @@
 package ui.home.leaderboard
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.data.source.remote.response.UserPoint
 import com.c22ps072.ficofit.databinding.ItemUsersPointBinding
@@ -27,29 +28,38 @@ class UsersPointListAdapter: RecyclerView.Adapter<UsersPointListAdapter.ViewHold
         return ViewHolder(itemUsersPointBinding)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listUserPoint[position]
         
-        when (position) {
-            0 -> {
-                holder.ivTrophy.setImageResource(R.drawable.ic_trophy_gold)
+        holder.apply {
+            fun imageLoader(resource: Int) {
+                Glide.with(itemView.context)
+                    .load(resource)
+                    .into(ivTrophy)
             }
-            1 -> {
-                holder.ivTrophy.setImageResource(R.drawable.ic_trophy_silver)
+
+            when (item.position) {
+                1 -> {
+                    ivTrophy.setPadding(0)
+                    imageLoader(R.drawable.ic_trophy_gold)
+                }
+                2 -> {
+                    ivTrophy.setPadding(0)
+                    imageLoader(R.drawable.ic_trophy_silver)
+                }
+                3 -> {
+                    ivTrophy.setPadding(0)
+                    imageLoader(R.drawable.ic_trophy_bronze)
+                }
+                else -> {
+                    ivTrophy.setPadding(20)
+                    imageLoader(R.drawable.ic_medal)
+                }
             }
-            2 -> {
-                holder.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
-            }
-            else -> {
-                holder.ivTrophy.setImageResource(R.drawable.ic_trophy_bronze)
-            }
-        }
-        
-        holder.apply { 
-            tvPosition.text = (position + 1).toString()
-            tvUsername.text = item.username
-            tvPoints.text = item.point.toString()
+
+            tvPosition.text = item.position.toString()
+            tvUsername.text = item.name
+            tvPoints.text = item.score.toString()
         }
     }
 

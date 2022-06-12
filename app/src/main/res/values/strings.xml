@@ -4,6 +4,12 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <string name="text_onboarding_1">Make Your Exercise Fun!</string>
+    <string name="text_onboarding_1_subtitle">Join us and enjoy your workout with our collection of minigames you can choose from!</string>
+    <string name="text_onboarding_2">Tackle new challenges</string>
+    <string name="text_onboarding_2_subtitle">Make your own target and collect rewards!</string>
+    <string name="text_onboarding_3">Backed by Next Generation AI</string>
+    <string name="text_onboarding_3_subtitle">We use Smart Movement Detection to bring an immersive workout experience to you</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="sign_in">Sign In</string>
@@ -30,4 +36,24 @@
     <string name="leader_board">Leader Board</string>
     <string name="fun_games">Fun Games</string>
     <string name="calisthenic">Calisthenic</string>
+    <string name="other">Other</string>
+    <string name="logout">Logout</string>
+    <string name="push_up">Push Up: %s</string>
+    <string name="sit_up">Sit Up: %s</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="calories_burn">Calories Burn</string>
+    <string name="games_has_been_play">Games Has Been Play</string>
+    <string name="your_current_position">Your Current Position</string>
+    <string name="_100kkal">10Kkal</string>
+    <string name="activities">Activities</string>
+    <string name="sit_ups">Sit Ups</string>
+    <string name="earn_points">Earn Points</string>
+    <string name="push_ups">Push Ups</string>
+    <string name="tv_endless_run">Endless Running Game</string>
+    <string name="tag_line">Get fit, don\'t quit</string>
+    <string name="current_points">Current Points : %s</string>
+    <string name="high_score">High Score: %s</string>
+    <string name="total_points">Total Points: %s</string>
+    <string name="great_you_ve_got">Great! You\'ve got :</string>
+    <string name="s_calories_burn">%s calories burn!</string>
 </resources>

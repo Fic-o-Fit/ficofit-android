@@ -23,7 +23,7 @@ class ApiConfig {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("https://ficofit-cloud-development-mgdqxgvf2q-et.a.run.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()
