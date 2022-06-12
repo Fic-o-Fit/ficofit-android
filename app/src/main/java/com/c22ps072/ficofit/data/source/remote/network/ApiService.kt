@@ -1,9 +1,6 @@
 package com.c22ps072.ficofit.data.source.remote.network
 
-import com.c22ps072.ficofit.data.source.remote.response.ScoreResponse
-import com.c22ps072.ficofit.data.source.remote.response.SignInResponse
-import com.c22ps072.ficofit.data.source.remote.response.SignUpResponse
-import com.c22ps072.ficofit.data.source.remote.response.UserPoint
+import com.c22ps072.ficofit.data.source.remote.response.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -44,5 +41,21 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Header("Cookie") cookie: String
     ): UserPoint
+
+    @FormUrlEncoded
+    @POST("/submit-weight")
+    suspend fun postSubmitWeight(
+        @Header("Authorization") token: String,
+        @Header("Cookie") cookie: String,
+        @Field("weight") weight: Int
+    ) : GlobalResponse
+
+    @FormUrlEncoded
+    @POST("/calories-counter")
+    suspend fun postCaloriesCounter(
+        @Header("Authorization") token: String,
+        @Header("Cookie") cookie: String,
+        @Field("reps") reps: Int
+    ) : CaloriesResponse
 
 }

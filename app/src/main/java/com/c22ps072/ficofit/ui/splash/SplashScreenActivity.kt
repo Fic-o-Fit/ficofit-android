@@ -35,10 +35,10 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun handlerIntent() {
         lifecycleScope.launchWhenCreated {
-            delay(1000)
             launch {
                 viewModel.getUserToken().collect { token ->
-                    if (token.isEmpty()) {
+                    delay(3000)
+                    if (token.isEmpty() || token.isBlank()) {
                         Intent(this@SplashScreenActivity, OnBoardingActivity::class.java).also { intent ->
                             startActivity(intent)
                             finish()

@@ -29,7 +29,6 @@ class RefreshTokenService : LifecycleService() {
                         authRepository.getUserEmail().collect { email ->
                             authRepository.getUserPassword().collect { password ->
                                 while(true) {
-                                    delay(10000)
                                     Log.e("Service", "loop service")
                                     Log.e("Service", "email : $email, password: $password")
                                     authRepository.postUserLogin(email, password).collect { result ->
@@ -39,7 +38,7 @@ class RefreshTokenService : LifecycleService() {
                                             }
                                         }
                                     }
-                                    delay(300000)
+                                    delay(180000)
                                 }
                             }
                         }

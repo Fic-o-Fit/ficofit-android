@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.c22ps072.ficofit.BuildConfig
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +27,9 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val ficofitVersion = "${getString(R.string.app_name)} v${BuildConfig.VERSION_NAME}"
+        binding.textView6.text = ficofitVersion
 
         binding.btnLogout.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_setting_to_logoutDialog)

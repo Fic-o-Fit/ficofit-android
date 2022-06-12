@@ -158,15 +158,16 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_calendar_month"
-                    app:tint="#4A00E0" />
+                    android:src="@drawable/ic_fire"
+                    app:tint="@color/accentColor" />
 
                 <TextView
-                    android:id="@+id/tv_started_habit"
-                    style="@style/Text.Card.Number"
+                    android:id="@+id/tv_calories_burn"
+                    android:textSize="26sp"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="100Kkal" />
+                    android:text="@string/_100kkal" />
 
                 <TextView
                     style="@style/Text.Card.Description"
@@ -190,14 +191,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_check"
-                    app:tint="#FF3C07" />
+                    app:tint="@color/primaryColor" />
 
                 <TextView
                     android:id="@+id/tv_total_completed"
-                    style="@style/Text.Card.Number"
+                    style="@style/Text.Card.Suffix"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="10 Times" />
+                    android:text="10x" />
 
                 <TextView
                     style="@style/Text.Card.Description"
@@ -252,62 +253,39 @@
                 app:cv_outDateStyle="endOfRow"
                 app:cv_scrollMode="paged" />
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:baselineAligned="false"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:weightSum="2">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:gravity="center"-->
-<!--                    tools:ignore="UseCompoundDrawables">-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    tools:ignore="UseCompoundDrawables">
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="12dp"-->
-<!--                        android:layout_height="12dp"-->
-<!--                        android:layout_marginEnd="8dp"-->
-<!--                        android:contentDescription="@string/all_complete"-->
-<!--                        android:src="@drawable/selected_date_background" />-->
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:contentDescription="@string/activities"
+                        android:src="@drawable/selected_date_background"/>
 
-<!--                    <TextView-->
-<!--                        style="@style/Text"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/all_complete"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textSize="12sp" />-->
+                    <TextView
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activities"
+                        android:textAlignment="center"
+                        android:textSize="12sp" />
 
-<!--                </LinearLayout>-->
+                </LinearLayout>
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:gravity="center"-->
-<!--                    tools:ignore="UseCompoundDrawables">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="12dp"-->
-<!--                        android:layout_height="12dp"-->
-<!--                        android:layout_marginEnd="8dp"-->
-<!--                        android:contentDescription="@string/some_complete"-->
-<!--                        android:src="@drawable/selected_date_border" />-->
-
-<!--                    <TextView-->
-<!--                        style="@style/Text"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/some_complete"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textSize="12sp" />-->
-
-<!--                </LinearLayout>-->
-<!--            </LinearLayout>-->
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -20,67 +20,145 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_fun_game"
+        android:id="@+id/tv_cal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/fun_games"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/ic_temple_run"
-        app:layout_constraintStart_toStartOf="@+id/ic_temple_run"
-        app:layout_constraintTop_toBottomOf="@+id/view_top" />
-
-    <ImageView
-        android:id="@+id/ic_temple_run"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="18dp"
-        android:src="@drawable/ic_ilustration_onboarding_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_fun_game" />
-
-    <View
-        android:id="@+id/view_wraper"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_capsul"
-        android:backgroundTint="@color/midGrey"
-        app:layout_constraintBottom_toBottomOf="@id/ic_temple_run"
-        app:layout_constraintEnd_toStartOf="@+id/ic_sit_up"
-        app:layout_constraintStart_toEndOf="@+id/ic_temple_run"
-        app:layout_constraintTop_toTopOf="@+id/ic_temple_run" />
-
-    <TextView
-        android:id="@+id/tv_calisthenics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_margin="16dp"
         android:text="@string/calisthenic"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/ic_push_up"
-        app:layout_constraintStart_toEndOf="@+id/view_wraper"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
-    <ImageView
-        android:id="@+id/ic_sit_up"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="18dp"
-        android:src="@drawable/ic_ilustration_onboarding_2"
-        app:layout_constraintEnd_toStartOf="@+id/ic_push_up"
-        app:layout_constraintStart_toEndOf="@+id/ic_temple_run"
-        app:layout_constraintTop_toBottomOf="@+id/tv_calisthenics" />
-
-    <ImageView
-        android:id="@+id/ic_push_up"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="32dp"
-        android:src="@drawable/ic_ilustration_onboarding_3"
+    <LinearLayout
+        android:id="@+id/btn_sit_ups"
+        style="@style/Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_calisthenics" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cal">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_ilustration_onboarding_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sit_ups"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:text="@string/earn_points"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_medal_20" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_push_ups"
+        style="@style/Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sit_ups">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_ilustration_onboarding_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/push_ups"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:text="@string/earn_points"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_medal_20" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/fun_games"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_push_ups" />
+
+    <LinearLayout
+        android:id="@+id/btn_endless_game"
+        style="@style/Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_ilustration_onboarding_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_endless_run"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:text="@string/earn_points"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_medal_20" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

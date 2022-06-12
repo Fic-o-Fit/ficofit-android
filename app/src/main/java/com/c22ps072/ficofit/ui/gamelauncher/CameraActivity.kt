@@ -9,18 +9,15 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.SurfaceView
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.data.classifier.CalisthenicsClassifier
@@ -29,16 +26,20 @@ import com.c22ps072.ficofit.data.source.model.BodyPart
 import com.c22ps072.ficofit.data.source.model.Pose
 import com.c22ps072.ficofit.databinding.ActivityCameraBinding
 import com.c22ps072.ficofit.service.TimeService
+import com.c22ps072.ficofit.utils.Helpers.isVisible
+import com.c22ps072.ficofit.utils.UnderDevelopmentDialog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import kotlin.math.roundToInt
 
-class CameraActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener, GameReportDialog.ReportDialogListener {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var type: String
+    var points: Int = 0
     var history = mutableListOf<Int>()
     var numFrameRequirement: Int = 5
     var downDone: Boolean = false
@@ -50,6 +51,8 @@ class CameraActivity : AppCompatActivity() {
     private var time = 0.0
     private var cameraSource: CameraSource? = null
     private val gameViewModel: GameViewModel by viewModels()
+
+    private val mFragmentManager = supportFragmentManager
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -92,7 +95,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         history = mutableListOf<Int>()
-        numFrameRequirement= 5
+        numFrameRequirement = 5
         downDone = false
         counter = 0
 
@@ -100,11 +103,36 @@ class CameraActivity : AppCompatActivity() {
         registerReceiver(updateTime, IntentFilter(TimeService.TIMER_UPDATED))
         startStopTimer()
         binding.btnEnd.setOnClickListener {
-             lifecycleScope.launch {
-                gameViewModel.getUserToken().collect { token ->
-                    gameViewModel.postSubmitScore(token, counter).collect { result ->
-                        result.onSuccess {
-                           onBackPressed()
+            setLoading(true)
+            startStopTimer()
+            points = ((counter / time) * 100).roundToInt()
+            lifecycleScope.launchWhenCreated {
+                launch {
+                    gameViewModel.getUserToken().collect { token ->
+                        Log.e("Camera", "Timer : $time, Counter: $counter")
+                        gameViewModel.getMyScore(token).collect { resultMyScore ->
+                            resultMyScore.onSuccess { recentScore ->
+                                val score: Int = recentScore.score + points
+                                gameViewModel.postSubmitScore(token, score).collect { result ->
+                                    result.onSuccess {
+                                        Log.e("Camera", it.status)
+
+                                        gameViewModel.postCaloriesCounter(token, counter).collect { caloriesResult ->
+                                            caloriesResult.onSuccess { calories ->
+                                                // show report dialog
+                                                showGameReportDialog(calories.caloriesBurn)
+                                                setLoading(false)
+                                            }
+                                            caloriesResult.onFailure { calories ->
+                                                Log.e("Camera", calories.message.toString())
+                                            }
+                                        }
+                                    }
+                                    result.onFailure {
+                                        Log.e("Camera", it.message.toString())
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -112,12 +140,20 @@ class CameraActivity : AppCompatActivity() {
         }
         binding.ivSetting.setOnClickListener {
             val mSettingDialogFragment = DialogSetting()
-
-            val mFragmentManager = supportFragmentManager
             mSettingDialogFragment.show(mFragmentManager, DialogSetting::class.java.simpleName)
         }
 
 
+    }
+
+    private fun showGameReportDialog(caloriesBurn: Double) {
+        val dialogReport = GameReportDialog()
+        val args = Bundle()
+
+        args.putString(GameReportDialog.TEXT_POINT, points.toString())
+        args.putString(GameReportDialog.TEXT_CALORIES, caloriesBurn.toString())
+        dialogReport.arguments = args
+        dialogReport.show(mFragmentManager, GameReportDialog::class.java.simpleName)
     }
 
     override fun onStart() {
@@ -284,6 +320,18 @@ class CameraActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    private fun setLoading(state: Boolean){
+        binding.apply {
+
+            if (state) {
+                viewLoading.isVisible(true)
+
+            }else {
+                viewLoading.isVisible(false)
+            }
+        }
+    }
+
 
     private fun startStopTimer()
     {
@@ -326,8 +374,30 @@ class CameraActivity : AppCompatActivity() {
     private fun makeTimeString( min: Int, sec: Int): String = String.format("%02d:%02d", min, sec)
 
     companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
+        val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        const val REQUEST_CODE_PERMISSIONS = 10
         const val EXTRA_CLASSIFICATION = "extra_classification"
+    }
+
+    private fun showUnderDevelopmentDialog() {
+        val mDialogUnderDevelopment = UnderDevelopmentDialog()
+        mDialogUnderDevelopment.show(mFragmentManager, UnderDevelopmentDialog::class.java.simpleName)
+    }
+
+    override fun onDialogSwitchClick(dialog: DialogFragment) {
+        showUnderDevelopmentDialog()
+    }
+
+    override fun onDialogModeClick(dialog: DialogFragment) {
+        showUnderDevelopmentDialog()
+    }
+
+    override fun onDialogNegativeClick(dialog: DialogFragment) {
+        dialog.dismiss()
+    }
+
+    override fun onButtonCloseListener(dialog: GameReportDialog) {
+        dialog.dismiss()
+        finish()
     }
 }

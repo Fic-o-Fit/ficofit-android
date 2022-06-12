@@ -4,18 +4,26 @@ package com.c22ps072.ficofit.data
 import android.util.Log
 import com.c22ps072.ficofit.data.source.local.PreferenceDataStore
 import com.c22ps072.ficofit.data.source.remote.network.ApiService
+import com.c22ps072.ficofit.data.source.remote.response.GlobalResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignInResponse
 import com.c22ps072.ficofit.data.source.remote.response.SignUpResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import java.net.URLEncoder
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor (
     private val dataStore: PreferenceDataStore,
     private val apiService: ApiService
 ): AuthDataSource {
+
+    private fun setCookie(email: String, jwt: String) : String {
+        val urlEncodedEmail = URLEncoder.encode(email, "UTF-8")
+        return "Content-Type=application%2Fjson; emailSession=$urlEncodedEmail; jwt=$jwt"
+    }
+
     override fun getUserToken(): Flow<String> = dataStore.getUserToken()
 
     override suspend fun saveUserToken(token: String) = dataStore.saveUserToken(token)
@@ -64,6 +72,18 @@ class AuthRepository @Inject constructor (
             emit(Result.success(response))
         } catch (e: Exception) {
             emit(Result.failure(e))
+        }
+    }
+
+    override suspend fun postSubmitWeight(token: String, weight: Int): Flow<Result<GlobalResponse>> = flow {
+        try {
+            val strToken = "Bearer $token"
+            dataStore.getUserEmail().collect { email ->
+                val response = apiService.postSubmitWeight(strToken, setCookie(email, token), weight)
+                emit(Result.success(response))
+            }
+        } catch (err: Exception) {
+            emit(Result.failure(err))
         }
     }
 }

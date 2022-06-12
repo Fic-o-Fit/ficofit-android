@@ -2,8 +2,10 @@
 
     <!-- Main Color -->
     <color name="baseColor">#FFFFFF</color>
-    <color name="primaryColor">#429382</color>
-    <color name="secondaryColor">#DAEDE7</color>
+    <color name="primaryColor">#173033</color>
+    <color name="secondaryColor">#429382</color>
+    <color name="variantColor">#D2E8E1</color>
+    <color name="variantSecondaryColor">#EEFFFA</color>
     <color name="accentColor">#F46A4D</color>
 
     <!-- Shades of Grey Color -->

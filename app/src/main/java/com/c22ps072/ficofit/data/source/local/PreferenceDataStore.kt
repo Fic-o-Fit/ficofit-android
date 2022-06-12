@@ -1,9 +1,7 @@
 package com.c22ps072.ficofit.data.source.local
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -14,6 +12,7 @@ class PreferenceDataStore @Inject constructor(private val dataStore: DataStore<P
     private val USER_NAME_KEY = stringPreferencesKey("user_name")
     private val USER_EMAIL_KEY = stringPreferencesKey("user_email")
     private val USER_PASSWORD_KEY = stringPreferencesKey("user_password_key")
+    private val USER_CALORIES_BURN = doublePreferencesKey("user_calories_burn")
 
     fun getUserToken(): Flow<String> = dataStore.data.map { it[USER_TOKEN_KEY] ?: "" }
 
@@ -54,6 +53,14 @@ class PreferenceDataStore @Inject constructor(private val dataStore: DataStore<P
     suspend fun saveUserPassword(password: String) {
         dataStore.edit { preferences ->
             preferences[USER_PASSWORD_KEY] = password
+        }
+    }
+
+    fun getUserCaloriesBurn() : Flow<Double> = dataStore.data.map { it[USER_CALORIES_BURN] ?: 0.0 }
+
+    suspend fun saveUserCaloriesBurn(calories: Double) {
+        dataStore.edit { preferences ->
+            preferences[USER_CALORIES_BURN] = calories
         }
     }
 

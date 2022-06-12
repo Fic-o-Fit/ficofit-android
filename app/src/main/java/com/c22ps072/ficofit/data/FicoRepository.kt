@@ -2,6 +2,7 @@ package com.c22ps072.ficofit.data
 
 import com.c22ps072.ficofit.data.source.local.PreferenceDataStore
 import com.c22ps072.ficofit.data.source.remote.network.ApiService
+import com.c22ps072.ficofit.data.source.remote.response.CaloriesResponse
 import com.c22ps072.ficofit.data.source.remote.response.ScoreResponse
 import com.c22ps072.ficofit.data.source.remote.response.UserPoint
 import kotlinx.coroutines.flow.Flow
@@ -59,4 +60,23 @@ class FicoRepository @Inject constructor(
     override suspend fun saveUserName(name: String) = dataStore.saveUserName(name)
 
     override  fun getUserToken(): Flow<String> = dataStore.getUserToken()
+
+    override fun getUserCaloriesBurn(): Flow<Double> = dataStore.getUserCaloriesBurn()
+
+    override suspend fun saveUserCaloriesBurn(calories: Double) = dataStore.saveUserCaloriesBurn(calories)
+
+    override suspend fun postCaloriesCounter(
+        token: String,
+        reps: Int
+    ): Flow<Result<CaloriesResponse>> = flow {
+        try {
+            val strToken = "Bearer $token"
+            dataStore.getUserEmail().collect {
+                val response = apiService.postCaloriesCounter(strToken, setCookie(it, token), reps)
+                emit(Result.success(response))
+            }
+        } catch (err: Exception) {
+            emit(Result.failure(err))
+        }
+    }
 }
