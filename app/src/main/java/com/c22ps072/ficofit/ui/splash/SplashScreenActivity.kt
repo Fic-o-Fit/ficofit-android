@@ -38,7 +38,7 @@ class SplashScreenActivity : AppCompatActivity() {
             launch {
                 viewModel.getUserToken().collect { token ->
                     delay(3000)
-                    if (token.isEmpty() || token.isBlank()) {
+                    if (token.isEmpty() || token.isBlank() || token == "not_set_yet") {
                         Intent(this@SplashScreenActivity, OnBoardingActivity::class.java).also { intent ->
                             startActivity(intent)
                             finish()
