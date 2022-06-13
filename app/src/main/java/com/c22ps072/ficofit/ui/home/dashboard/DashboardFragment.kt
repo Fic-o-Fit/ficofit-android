@@ -54,11 +54,17 @@ class DashboardFragment : Fragment() {
         binding.cardLeaderBeard.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToLeaderBoardFragment())
         }
+
+        // Histories Features is Under Development
+        binding.cardTotalGameCompleted.setOnClickListener {
+            findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToUnderDevelopmentDialog())
+        }
         binding.calendarContainer.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionNavigationDashboardToUnderDevelopmentDialog())
         }
     }
 
+    // Histories (include calendar) Features is Under Development
     private fun calendarViewSetup() {
         binding.calendarView.dayBinder = object : DayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, day: CalendarDay) {

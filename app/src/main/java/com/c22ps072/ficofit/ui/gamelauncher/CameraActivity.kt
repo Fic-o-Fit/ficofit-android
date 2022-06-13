@@ -385,10 +385,10 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
         mDialogUnderDevelopment.show(mFragmentManager, UnderDevelopmentDialog::class.java.simpleName)
     }
 
+    // Switch Camera and Mode features is Under Development
     override fun onDialogSwitchClick(dialog: DialogFragment) {
         showUnderDevelopmentDialog()
     }
-
     override fun onDialogModeClick(dialog: DialogFragment) {
         showUnderDevelopmentDialog()
     }
