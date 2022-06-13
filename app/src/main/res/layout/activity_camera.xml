@@ -52,12 +52,13 @@
         app:layout_constraintTop_toTopOf="@id/tv_counter"
         app:tint="@color/white" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn_end"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="16dp"
         android:background="@color/accentColor"
+        android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="@+id/tv_timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_timer"
