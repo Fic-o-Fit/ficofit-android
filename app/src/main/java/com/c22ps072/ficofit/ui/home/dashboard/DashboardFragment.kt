@@ -115,6 +115,7 @@ class DashboardFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getUserName().collect {
                 binding.tvName.text = it
+                binding.tvGretting.text = greatingMessage()
             }
         }
 
@@ -153,6 +154,18 @@ class DashboardFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         dashboardJob.start()
+    }
+
+    private fun greatingMessage(): String{
+
+        val calendar = Calendar.getInstance()
+
+        return when (calendar.get(Calendar.HOUR_OF_DAY)){
+            in 0..11 -> getString(R.string.good_morning)
+            in 12..18 -> getString(R.string.good_afternoon)
+            in 18..23 -> getString(R.string.good_evening)
+            else -> "Hello"
+        }
     }
 
     companion object {

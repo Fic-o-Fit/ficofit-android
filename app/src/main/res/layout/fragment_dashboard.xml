@@ -36,7 +36,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/toolbar_title_secondary"
+                        android:id="@+id/tv_gretting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -50,7 +50,7 @@
                         style="@style/TextStyle.ToolbarTitlePrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/toolbar_title_secondary"
+                        android:layout_below="@+id/tv_gretting"
                         android:layout_alignParentStart="true"
                         android:textStyle="bold"
                         tools:text="Your Name"
