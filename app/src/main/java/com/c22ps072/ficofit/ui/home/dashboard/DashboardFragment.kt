@@ -121,7 +121,7 @@ class DashboardFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getUserName().collect {
                 binding.tvName.text = it
-                binding.tvGretting.text = greatingMessage()
+                binding.tvGretting.text = greetingMessage()
             }
         }
 
@@ -162,7 +162,7 @@ class DashboardFragment : Fragment() {
         dashboardJob.start()
     }
 
-    private fun greatingMessage(): String{
+    private fun greetingMessage(): String{
 
         val calendar = Calendar.getInstance()
 

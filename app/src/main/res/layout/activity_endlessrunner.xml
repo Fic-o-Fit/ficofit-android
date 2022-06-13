@@ -34,6 +34,11 @@
         android:layout_marginStart="31dp"
         android:layout_marginTop="31dp"
         android:text="@string/current_points"
+        android:shadowColor="@color/midGrey"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:elevation="8dp"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,6 +51,10 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="68dp"
         android:text="@string/high_score"
+        android:shadowColor="@color/midGrey"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,6 +67,10 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="108dp"
         android:text="@string/total_points"
+        android:shadowColor="@color/midGrey"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

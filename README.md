@@ -12,6 +12,15 @@
 
 Fic-o-fit is A fitness application containing multiple ML-powered mini-games. One example is that the users can exercise in front of their phone's front camera while the app detects their movement using motion detection/recognition. Depending on the mechanism of the individual mini-games, the users will gain some points after finishing the mission. The total point can be accessed through the leaderboard where they can also see their friends' progress. This gamified approach helps with increasing the public's interest in working out more regularly and improving their overall health.
 
+### Technologies Used
+
+* [Kotlin](https://kotlinlang.org/)
+* [AndroidX Jetpack](https://developer.android.com/jetpack/androidx)
+* [TFLite](https://www.tensorflow.org/lite/index.html)
+* [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+* [Retrofit](https://square.github.io/retrofit/)
+
+
 # How to run the app to your environment
 
 * Clone the repository
