@@ -1,10 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Main Color -->
+    <color name="baseColor">#2F2B54</color>
+    <color name="primaryColor">#545FFF</color>
+    <color name="secondaryColor">#009FFF</color>
+    <color name="accentColor">#FF6A00</color>
+
+    <!-- Shades of Grey Color -->
+    <color name="darkGrey">#92959E</color>
+    <color name="midGrey">#D0D2DA</color>
+    <color name="lightGrey">#F5F5F7</color>
+
     <!-- Base application theme. -->
-    <style name="Theme.FicOFit" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FicOFit" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/secondaryColor</item>
+        <item name="colorOnPrimary">@color/darkGrey</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
