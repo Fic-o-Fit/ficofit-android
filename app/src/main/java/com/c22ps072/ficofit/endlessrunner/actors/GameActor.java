@@ -12,10 +12,6 @@ public abstract class GameActor extends Actor {
     protected UserData userData;
     protected Rectangle screenRectangle;
 
-    public GameActor() {
-
-    }
-
     public GameActor(Body body) {
         this.body = body;
         this.userData = (UserData) body.getUserData();
@@ -32,7 +28,6 @@ public abstract class GameActor extends Actor {
             // This means the world destroyed the body (enemy or runner went out of bounds)
             remove();
         }
-
     }
 
     public abstract UserData getUserData();

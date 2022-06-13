@@ -9,7 +9,7 @@ import com.c22ps072.ficofit.endlessrunner.box2d.EnemyUserData;
 
 public class Enemy extends GameActor {
 
-    private TextureRegion trEnemy;
+    private final TextureRegion trEnemy;
 
     public Enemy(Body body) {
         super(body);

@@ -5,11 +5,8 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.c22ps072.ficofit.R
 import com.c22ps072.ficofit.data.source.local.PreferenceDataStore.Companion.USER_CALORIES_BURN
 import com.c22ps072.ficofit.databinding.FragmentDialogGameReportBinding
@@ -17,15 +14,12 @@ import com.c22ps072.ficofit.di.dataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class GameReportDialog : DialogFragment() {
     private lateinit var listener: ReportDialogListener
     private lateinit var _binding: FragmentDialogGameReportBinding
     private val binding get() = _binding
-
-    private val gameViewModel: GameViewModel by viewModels()
 
     interface ReportDialogListener {
         fun onButtonCloseListener(dialog: GameReportDialog, calories: Double)

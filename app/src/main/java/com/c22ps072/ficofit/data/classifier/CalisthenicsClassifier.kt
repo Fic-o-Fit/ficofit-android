@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel
 class CalisthenicsClassifier(assetManager: AssetManager, calisthenicType: String) {
     private var INTERPRETER: Interpreter
     private var threshold: Float = 0.9f
-    private var INPUT:IntArray
+    private var INPUT: IntArray
     private var OUTPUT: IntArray
     private var MODEL_TYPE:String
 
@@ -18,7 +18,7 @@ class CalisthenicsClassifier(assetManager: AssetManager, calisthenicType: String
         val tfliteOptions = Interpreter.Options()
         tfliteOptions.setNumThreads(5)
         MODEL_TYPE = calisthenicType
-        var modelPath = when (MODEL_TYPE) {
+        val modelPath = when (MODEL_TYPE) {
             "push" -> {
                 "pushup-model.tflite"
             }
@@ -63,9 +63,9 @@ class CalisthenicsClassifier(assetManager: AssetManager, calisthenicType: String
     }
 
     private fun poseToArray(pose: Pose) : FloatArray{
-        var result = FloatArray(INPUT[1])   //51
+        val result = FloatArray(INPUT[1])   //51
         for (keypoint in pose.keyPoints) {
-            var position = keypoint.bodyPart.position * 3
+            val position = keypoint.bodyPart.position * 3
             if (keypoint.score > 0.2f) {
                 result[position] = keypoint.coordinate.y   //the y coordinate is the first element
                 result[position+1] = keypoint.coordinate.x

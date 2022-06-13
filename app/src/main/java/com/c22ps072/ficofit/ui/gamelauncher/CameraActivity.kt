@@ -32,13 +32,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
-import java.util.concurrent.ExecutorService
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener, GameReportDialog.ReportDialogListener {
     private lateinit var binding: ActivityCameraBinding
-    private lateinit var cameraExecutor: ExecutorService
     private lateinit var type: String
     var points: Int = 0
     var history = mutableListOf<Int>()
@@ -95,7 +93,7 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
             )
         }
 
-        history = mutableListOf<Int>()
+        history = mutableListOf()
         numFrameRequirement = 5
         downDone = false
         counter = 0
@@ -200,8 +198,7 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
                                     }
 
                                     if (poseIsCorrect && bodyIsVisible(pose)){
-                                        var shoulderY = 0
-                                        shoulderY = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x < pose.keyPoints[BodyPart.RIGHT_ANKLE.position].coordinate.x){
+                                        val shoulderY: Int = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x < pose.keyPoints[BodyPart.RIGHT_ANKLE.position].coordinate.x){
                                             (pose.keyPoints[BodyPart.RIGHT_SHOULDER.position].coordinate.y).toInt()
                                         }else{
                                             (pose.keyPoints[BodyPart.LEFT_SHOULDER.position].coordinate.y).toInt()
@@ -228,8 +225,7 @@ class CameraActivity : AppCompatActivity(), DialogSetting.DialogSettingListener,
                                         binding.tvCounter.text = getString(R.string.push_up, counter.toString())
                                     }
                                     if (poseIsCorrect && bodyIsVisible(pose)){
-                                        var shoulderY = 0
-                                        shoulderY = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x > pose.keyPoints[BodyPart.RIGHT_KNEE.position].coordinate.x){
+                                        val shoulderY: Int = if(pose.keyPoints[BodyPart.NOSE.position].coordinate.x > pose.keyPoints[BodyPart.RIGHT_KNEE.position].coordinate.x){
                                             (pose.keyPoints[BodyPart.RIGHT_SHOULDER.position].coordinate.y).toInt()
                                         }else{
                                             (pose.keyPoints[BodyPart.LEFT_SHOULDER.position].coordinate.y).toInt()

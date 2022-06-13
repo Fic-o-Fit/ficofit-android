@@ -147,6 +147,7 @@ class CameraSource(
         }
     }
 
+    // Switch Camera feature is Under Development
     suspend fun switchCamera() {
         for (cameraId in cameraManager.cameraIdList) {
             if (this.cameraId != cameraId) {

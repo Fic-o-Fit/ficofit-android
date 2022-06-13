@@ -45,8 +45,8 @@ class LeaderBoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomNav = requireActivity().findViewById<View>(R.id.bottomAppBar)
-        fabGame = requireActivity().findViewById<View>(R.id.btn_game)
+        bottomNav = requireActivity().findViewById(R.id.bottomAppBar)
+        fabGame = requireActivity().findViewById(R.id.btn_game)
         View.GONE.let {
             bottomNav.visibility = it
             fabGame.visibility = it

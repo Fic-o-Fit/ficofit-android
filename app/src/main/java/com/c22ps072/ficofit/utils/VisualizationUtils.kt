@@ -1,12 +1,11 @@
-
 package com.c22ps072.ficofit.utils
+
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import com.c22ps072.ficofit.data.source.model.BodyPart
 import com.c22ps072.ficofit.data.source.model.Pose
-import kotlin.math.max
 
 object VisualizationUtils {
     /** Radius of circle used to draw keypoints.  */
