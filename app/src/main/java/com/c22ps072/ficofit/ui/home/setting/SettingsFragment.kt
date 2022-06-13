@@ -31,6 +31,14 @@ class SettingsFragment : Fragment() {
         val ficofitVersion = "${getString(R.string.app_name)} v${BuildConfig.VERSION_NAME}"
         binding.textView6.text = ficofitVersion
 
+        // Share and Feedback features is Under Development in this (alpha) version
+        binding.btnSendFeedback.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_setting_to_underDevelopmentDialog)
+        }
+        binding.btnShareApp.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_setting_to_underDevelopmentDialog)
+        }
+
         binding.btnLogout.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_setting_to_logoutDialog)
         }

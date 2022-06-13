@@ -14,9 +14,7 @@ public class Ground extends GameActor {
     private final TextureRegion trGround;
     private Rectangle textureRegionBounds1;
     private Rectangle textureRegionBounds2;
-    private int speed = 10;
-    private int APP_WIDTH;
-    private int APP_HEIGHT;
+    private final int speed = 10;
 
     public Ground(Body body) {
         super(body);

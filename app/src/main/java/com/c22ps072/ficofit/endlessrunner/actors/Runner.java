@@ -13,7 +13,7 @@ public class Runner extends GameActor {
     private boolean dodging;
     private boolean jumping;
     private boolean hit;
-    private TextureRegion trRunner;
+    private final TextureRegion trRunner;
 
     public Runner(Body body) {
         super(body);

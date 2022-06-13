@@ -13,7 +13,7 @@ class PreferenceDataStore @Inject constructor(private val dataStore: DataStore<P
     private val USER_EMAIL_KEY = stringPreferencesKey("user_email")
     private val USER_PASSWORD_KEY = stringPreferencesKey("user_password_key")
 
-    fun getUserToken(): Flow<String> = dataStore.data.map { it[USER_TOKEN_KEY] ?: "" }
+    fun getUserToken(): Flow<String> = dataStore.data.map { it[USER_TOKEN_KEY] ?: "not_set_yet" }
 
     suspend fun saveUserToken(token: String) {
         dataStore.edit { preferences ->

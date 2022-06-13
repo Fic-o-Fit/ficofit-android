@@ -268,26 +268,6 @@ class EndlessRunnerActivity : FragmentActivity(), AndroidFragmentApplication.Cal
                                 tvTotalPoints.text = getString(R.string.total_points, totalPoints.toString())
                             }
 
-
-                            // ini buat test aja
-
-//                            val wristY = (pose.keypoints[BodyPart.NOSE.position].coordinate.y).toInt()
-//                            if(pose.keypoints[BodyPart.NOSE.position].score > 0.2){
-//                                hipHistory.add(wristY)
-//                            }
-//                            hipHistory = hipHistory.takeLast(5).toMutableList()
-//                            if(isIncreasing(hipHistory)){
-//                                if(lastJumpTime != null){
-//                                    if((SystemClock.elapsedRealtime() - lastJumpTime!!) > 1000){ // it will have to wait at least 1 sec
-//                                        lastJumpTime = SystemClock.elapsedRealtime()
-//                                        endlessRunnerFragment.game.triggerJump()
-//                                    }
-//                                }else{
-//                                    lastJumpTime = SystemClock.elapsedRealtime()
-//                                    endlessRunnerFragment.game.triggerJump()
-//                                }
-//                            }
-
                             if(bodyIsVisible(pose)){
                                 numFramesRequirement = if(currentFps < 5){
                                     5

@@ -14,12 +14,12 @@ public enum EnemyType {
     //    FLYING_SMALL(1f, 1f, Constants.ENEMY_X, Constants.FLYING_ENEMY_Y, Constants.ENEMY_DENSITY),
 //    FLYING_WIDE(2f, 1f, Constants.ENEMY_X, Constants.FLYING_ENEMY_Y, Constants.ENEMY_DENSITY);
 
-    private float width;
-    private float height;
-    private float x;
-    private float y;
-    private float density;
-    private String filepath;
+    private final float width;
+    private final float height;
+    private final float x;
+    private final float y;
+    private final float density;
+    private final String filepath;
 
     EnemyType(float width, float height, float x, float y, float density, String filepath) {
         this.width = width;

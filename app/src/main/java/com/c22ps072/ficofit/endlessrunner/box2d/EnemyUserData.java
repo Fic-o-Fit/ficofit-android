@@ -7,7 +7,7 @@ import com.c22ps072.ficofit.endlessrunner.utils.Constants;
 public class EnemyUserData extends UserData {
 
     private Vector2 linearVelocity;
-    private String filepath;
+    private final String filepath;
 
     public EnemyUserData(float width, float height, String filepath) {
         super(width, height);

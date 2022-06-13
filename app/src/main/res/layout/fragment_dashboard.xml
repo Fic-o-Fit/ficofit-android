@@ -146,7 +146,7 @@
             app:layout_constraintTop_toBottomOf="@+id/card_streak">
 
             <LinearLayout
-                android:id="@+id/card_habit_in_progress"
+                android:id="@+id/card_calories_burn_counter"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
@@ -178,7 +178,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/card_total_habit_completed"
+                android:id="@+id/card_total_game_completed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

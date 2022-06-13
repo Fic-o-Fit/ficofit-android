@@ -22,14 +22,8 @@ import kotlin.math.min
 
 class PoseEstimator(assetManager: AssetManager) {
     private var INTERPRETER: Interpreter
-    private val PIXEL_SIZE: Int = 3
-    private val IMAGE_MEAN = 0
-    private val IMAGE_STD = 255.0f
-    private val MAX_RESULTS = 3
-    private val THRESHOLD = 0.4f
 
     private val MIN_CROP_KEYPOINT_SCORE = .2f
-    private val CPU_NUM_THREADS = 4
     private val TORSO_EXPANSION_RATIO = 1.9f
     private val BODY_EXPANSION_RATIO = 1.2f
 
@@ -134,11 +128,10 @@ class PoseEstimator(assetManager: AssetManager) {
     }
 
     private fun processInputImage(bitmap: Bitmap, inputWidth: Int, inputHeight: Int): TensorImage? {
-        //println(inputWidth)
         val width: Int = bitmap.width
         val height: Int = bitmap.height
         val size = if (height > width) width else height
-        //println("$width $height")
+
         val imageProcessor = ImageProcessor.Builder().apply {
             add(ResizeWithCropOrPadOp(size, size))
             add(ResizeOp(inputWidth, inputHeight, ResizeOp.ResizeMethod.BILINEAR))
